@@ -19,7 +19,7 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
-	// °ÔÀÓ ³»³» »ì¾ÆÀÖ¾î¾ß ÇÏ´Â °Í¸¸ µ¿Àû ÇÒ´ç
+	// ê²Œì„ ë‚´ë‚´ ì‚´ì•„ìˆì–´ì•¼ í•˜ëŠ” ê²ƒë§Œ ë™ì  í• ë‹¹
 	m_pSaveManager = new CSaveGame;
 	m_GameStatus = CHOOSING_CLASS_OR_LOAD;
 }
@@ -43,12 +43,12 @@ void CMainGame::Update()
 			OnCombat();
 			break;
 		default:
-			cout << "ºñÁ¤»ó Á¾·á" << endl;
+			cout << "ë¹„ì •ìƒ ì¢…ë£Œ" << endl;
 			return;
 		}
 	}
 
-	// Á¾·á ¹öÆ°À» ´­·¶À» ¶§ while¹® ¹ÛÀ¸·Î
+	// ì¢…ë£Œ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ whileë¬¸ ë°–ìœ¼ë¡œ
 }
 
 void CMainGame::Release()
@@ -68,29 +68,29 @@ void CMainGame::ChooseClassOrLoad()
 	while (true)
 	{
 		system("cls");
-		cout << "1. Àü»ç 2. ¸¶¹ı»ç 3. µµÀû 4. ºÒ·¯¿À±â" << endl;
-		cout << "Á÷¾÷À» ¼±ÅÃÇÏ¼¼¿ä : ";
+		cout << "1. ì „ì‚¬ 2. ë§ˆë²•ì‚¬ 3. ë„ì  4. ë¶ˆëŸ¬ì˜¤ê¸°" << endl;
+		cout << "ì§ì—…ì„ ì„ íƒí•˜ì„¸ìš” : ";
 
 		int iClassSelection(0);
 		cin >> iClassSelection;
-	
+
 		switch (iClassSelection)
 		{
 		case 1:
-			// Àü»ç Á÷¾÷À¸·Î µ¿Àû ÇÒ´ç
-			m_pPlayer = new CCharacter("Àü»ç", 150, 150, 5);
+			// ì „ì‚¬ ì§ì—…ìœ¼ë¡œ ë™ì  í• ë‹¹
+			m_pPlayer = new CCharacter("ì „ì‚¬", 150, 150, 5);
 			m_pPlayer->InitializeClass(iClassSelection);
 			SetGameStatus(ON_MAINMENU);
 			return;
 		case 2:
-			// ¸¶¹ı»ç Á÷¾÷À¸·Î µ¿Àû ÇÒ´ç
-			m_pPlayer = new CCharacter("¸¶¹ı»ç", 50, 50, 15);
+			// ë§ˆë²•ì‚¬ ì§ì—…ìœ¼ë¡œ ë™ì  í• ë‹¹
+			m_pPlayer = new CCharacter("ë§ˆë²•ì‚¬", 50, 50, 15);
 			m_pPlayer->InitializeClass(iClassSelection);
 			SetGameStatus(ON_MAINMENU);
 			return;
 		case 3:
-			// µµÀû Á÷¾÷À¸·Î µ¿Àû ÇÒ´ç
-			m_pPlayer = new CCharacter("µµÀû", 100, 100, 10);
+			// ë„ì  ì§ì—…ìœ¼ë¡œ ë™ì  í• ë‹¹
+			m_pPlayer = new CCharacter("ë„ì ", 100, 100, 10);
 			m_pPlayer->InitializeClass(iClassSelection);
 			SetGameStatus(ON_MAINMENU);
 			return;
@@ -100,7 +100,7 @@ void CMainGame::ChooseClassOrLoad()
 			SetGameStatus(ON_MAINMENU);
 			return;
 		default:
-			cout << "À¯È¿ÇÑ ÀÔ·Â°ªÀ» ÀÔ·ÂÇÏ¼¼¿ä" << endl;
+			cout << "ìœ íš¨í•œ ì…ë ¥ê°’ì„ ì…ë ¥í•˜ì„¸ìš”" << endl;
 			system("pause");
 			continue;
 		}
@@ -113,8 +113,8 @@ void CMainGame::OnMainMenu()
 	{
 		system("cls");
 		PrintInfo(m_pPlayer);
-		cout << "1. »ç³ÉÅÍ  2. ÀúÀåÇÏ±â  3. °ÔÀÓ Á¾·á" << endl;
-		cout << "¼±ÅÃÁö¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+		cout << "1. ì‚¬ëƒ¥í„°  2. ì €ì¥í•˜ê¸°  3. ê²Œì„ ì¢…ë£Œ" << endl;
+		cout << "ì„ íƒì§€ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 
 		int iMainMenuSelection(0);
 		cin >> iMainMenuSelection;
@@ -122,19 +122,19 @@ void CMainGame::OnMainMenu()
 		switch (iMainMenuSelection)
 		{
 		case 1:
-			// »ç³ÉÅÍ·Î ÀÌµ¿
+			// ì‚¬ëƒ¥í„°ë¡œ ì´ë™
 			SetGameStatus(ON_FIELD);
 			return;
 		case 2:
-			// ÀúÀå
+			// ì €ì¥
 			m_pSaveManager->Save(m_pPlayer);
 			return;
 		case 3:
-			// °ÔÀÓ Á¾·á
+			// ê²Œì„ ì¢…ë£Œ
 			SetGameStatus(QUIT);
 			return;
 		default:
-			cout << "¿Ã¹Ù¸¥ ¼±ÅÃÁö¸¦ ÀÔ·ÂÇÏ¼¼¿ä.";
+			cout << "ì˜¬ë°”ë¥¸ ì„ íƒì§€ë¥¼ ì…ë ¥í•˜ì„¸ìš”.";
 			system("pause");
 			break;
 		}
@@ -147,8 +147,8 @@ void CMainGame::OnField()
 	{
 		system("cls");
 		PrintInfo(m_pPlayer);
-		cout << "1. ÃÊ±Ş  2. Áß±Ş  3. °í±Ş  4. µ¹¾Æ°¡±â" << endl;
-		cout << "¼±ÅÃÁö¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+		cout << "1. ì´ˆê¸‰  2. ì¤‘ê¸‰  3. ê³ ê¸‰  4. ëŒì•„ê°€ê¸°" << endl;
+		cout << "ì„ íƒì§€ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 
 		int iFieldSelection(0);
 		cin >> iFieldSelection;
@@ -156,22 +156,22 @@ void CMainGame::OnField()
 		switch (iFieldSelection)
 		{
 		case 1:
-			m_pMonster = new CCharacter("ÃÊ±Ş ¸ó½ºÅÍ", 30, 30, 5);
+			m_pMonster = new CCharacter("ì´ˆê¸‰ ëª¬ìŠ¤í„°", 30, 30, 5);
 			SetGameStatus(ON_COMBAT);
 			return;
 		case 2:
-			m_pMonster = new CCharacter("Áß±Ş ¸ó½ºÅÍ", 60, 60, 7);
+			m_pMonster = new CCharacter("ì¤‘ê¸‰ ëª¬ìŠ¤í„°", 60, 60, 7);
 			SetGameStatus(ON_COMBAT);
 			return;
 		case 3:
-			m_pMonster = new CCharacter("°í±Ş ¸ó½ºÅÍ", 90, 90, 10);
+			m_pMonster = new CCharacter("ê³ ê¸‰ ëª¬ìŠ¤í„°", 90, 90, 10);
 			SetGameStatus(ON_COMBAT);
 			return;
 		case 4:
 			SetGameStatus(ON_MAINMENU);
 			return;
 		default:
-			cout << "¿Ã¹Ù¸¥ ¼±ÅÃÁö¸¦ ÀÔ·ÂÇÏ¼¼¿ä." << endl;
+			cout << "ì˜¬ë°”ë¥¸ ì„ íƒì§€ë¥¼ ì…ë ¥í•˜ì„¸ìš”." << endl;
 			system("pause");
 			continue;
 		}
@@ -187,8 +187,8 @@ void CMainGame::OnCombat()
 		PrintInfo(m_pPlayer);
 		PrintInfo(m_pMonster);
 
-		cout << "1. °ø°İ 2. µµ¸Á" << endl;
-		cout << "¼±ÅÃÁö¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+		cout << "1. ê³µê²© 2. ë„ë§" << endl;
+		cout << "ì„ íƒì§€ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 
 		int iCombatSelection(0);
 		cin >> iCombatSelection;
@@ -196,15 +196,15 @@ void CMainGame::OnCombat()
 		switch (iCombatSelection)
 		{
 		case 1:
-			// °ø°İ ÁÖ°í¹Ş±â
+			// ê³µê²© ì£¼ê³ ë°›ê¸°
 			CombatSingleTurn();
 			return;
 		case 2:
-			// ÇöÀç ´ëÄ¡ÁßÀÎ ¸ó½ºÅÍ ¸Ş¸ğ¸® ¹İÈ¯ & ÇÊµå·Î µ¹¾Æ°¡±â
+			// í˜„ì¬ ëŒ€ì¹˜ì¤‘ì¸ ëª¬ìŠ¤í„° ë©”ëª¨ë¦¬ ë°˜í™˜ & í•„ë“œë¡œ ëŒì•„ê°€ê¸°
 			RunAway();
 			return;
 		default:
-			cout << "¿Ã¹Ù¸¥ ¼±ÅÃÁö¸¦ ÀÔ·ÂÇÏ¼¼¿ä." << endl;
+			cout << "ì˜¬ë°”ë¥¸ ì„ íƒì§€ë¥¼ ì…ë ¥í•˜ì„¸ìš”." << endl;
 			system("pause");
 			continue;
 		}
@@ -213,36 +213,36 @@ void CMainGame::OnCombat()
 
 void CMainGame::CombatSingleTurn()
 {
-	// ÇÃ·¹ÀÌ¾î ¼±°ø
+	// í”Œë ˆì´ì–´ ì„ ê³µ
 	m_pPlayer->Attack(m_pMonster);
 	if (m_pMonster->IsDead())
 	{
 		system("cls");
-		
+
 		PrintInfo(m_pPlayer);
 		PrintInfo(m_pMonster);
-		
-		cout << "½Â¸®!" << endl;
+
+		cout << "ìŠ¹ë¦¬!" << endl;
 		SafeDeleteCharacter(m_pMonster);
-		
+
 		system("pause");
-		
+
 		SetGameStatus(ON_FIELD);
 		return;
 	}
 
-	// ¸ó½ºÅÍ ÈÄ°ø
+	// ëª¬ìŠ¤í„° í›„ê³µ
 	m_pMonster->Attack(m_pPlayer);
 	if (m_pPlayer->IsDead())
 	{
 		system("cls");
-		
+
 		PrintInfo(m_pPlayer);
 		PrintInfo(m_pMonster);
-		
-		cout << "ÆĞ¹è" << endl;
+
+		cout << "íŒ¨ë°°" << endl;
 		SafeDeleteCharacter(m_pMonster);
-		
+
 		system("pause");
 
 		m_pPlayer->Revive();
@@ -262,14 +262,14 @@ void CMainGame::PrintInfo(CCharacter* _pCharacter)
 	if (_pCharacter != nullptr)
 	{
 		cout << "================================" << endl;
-		cout << "ÀÌ¸§ : " << _pCharacter->GetName() << endl;
-		cout << "Ã¼·Â : " << _pCharacter->GetHP() << "\t"
-			<< "°ø°İ·Â : " << _pCharacter->GetAttack() << endl;
+		cout << "ì´ë¦„ : " << _pCharacter->GetName() << endl;
+		cout << "ì²´ë ¥ : " << _pCharacter->GetHP() << "\t"
+			<< "ê³µê²©ë ¥ : " << _pCharacter->GetAttack() << endl;
 	}
 	else
 	{
 		cout << "================================" << endl;
-		cout << "ÇÃ·¹ÀÌ¾î(¸ó½ºÅÍ) Á¤º¸°¡ ¾ø½À´Ï´Ù" << endl;
+		cout << "í”Œë ˆì´ì–´(ëª¬ìŠ¤í„°) ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤" << endl;
 	}
 }
 

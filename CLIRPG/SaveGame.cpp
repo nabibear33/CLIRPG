@@ -14,26 +14,26 @@ CSaveGame::~CSaveGame()
 
 void CSaveGame::Save(CCharacter* pPlayer)
 {
-	// ÆÄÀÏ·Î ÀúÀå
+	// íŒŒì¼ë¡œ ì €ì¥
 	FILE* SaveFile;
 	errno_t err = fopen_s(&SaveFile, PATH, "wb");
 	if (err == 0)
 	{
 		fwrite(pPlayer, sizeof(CCharacter), 1, SaveFile);
 		fclose(SaveFile);
-		cout << "ÀúÀå ¿Ï·á" << endl;
+		cout << "ì €ì¥ ì™„ë£Œ" << endl;
 		system("pause");
 	}
 	else
 	{
-		cout << "½ºÆ®¸² °³¹æ ½ÇÆĞ" << endl;
+		cout << "ìŠ¤íŠ¸ë¦¼ ê°œë°© ì‹¤íŒ¨" << endl;
 		system("pause");
 	}
 }
 
 void CSaveGame::Load(CCharacter*& pPlayer)
 {
-	// ÆÄÀÏ ºÒ·¯¿À±â
+	// íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
 	FILE* LoadFile;
 	errno_t err = fopen_s(&LoadFile, PATH, "rb");
 	if (err == 0)
@@ -43,7 +43,7 @@ void CSaveGame::Load(CCharacter*& pPlayer)
 	}
 	else
 	{
-		cout << "½ºÆ®¸² °³¹æ ½ÇÆĞ" << endl;
+		cout << "ìŠ¤íŠ¸ë¦¼ ê°œë°© ì‹¤íŒ¨" << endl;
 		system("pause");
 	}
 }

@@ -1,21 +1,16 @@
 #ifndef PCH_H
 #define PCH_H
 
-// ÀüÃ¼ ±¸Á¶µµ
-// Á÷¾÷ ¼±ÅÃÃ¢(½ÃÀÛÁ¡) -> ¸ŞÀÎ ¸Ş´º <-> »ç³ÉÅÍ <-> ÀüÅõ
-//						   ¡é
-//						  Á¾·á
-
 #include <iostream>
 #include <string.h>
 
 using namespace std;
 
-// const »ó¼ö
+// const ìƒìˆ˜
 const int MAX_NAME_SIZE = 20;
 const char PATH[] = "save.dat";
 
-// ¸Ş¸ğ¸® °Ë»ç
+// ë©”ëª¨ë¦¬ ê²€ì‚¬
 #ifdef _DEBUG
 
 #define _CRTDBG_MAP_ALLOC

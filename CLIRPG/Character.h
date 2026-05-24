@@ -5,12 +5,12 @@
 class CCharacter
 {
 public:
-	// »ı¼ºÀÚ, ¼Ò¸êÀÚ
+	// ìƒì„±ì, ì†Œë©¸ì
 	CCharacter();
 	CCharacter(const char _szName[], int _iMaxHP, int _iHP, int _iAttack);
 	~CCharacter();
 
-	// ±âº» ÇÔ¼ö
+	// ê¸°ë³¸ í•¨ìˆ˜
 	void Initialize();
 	void Update();
 	void Release();
@@ -24,7 +24,7 @@ public:
 	void SetHP(int _iHP);
 	void SetAttack(int _iAttack);
 
-	// ÀüÅõ °ü·Ã ÇÔ¼ö
+	// ì „íˆ¬ ê´€ë ¨ í•¨ìˆ˜
 	void Attack(CCharacter* pCounterPart);
 	void OnDamaged(int _iAttack);
 	bool IsDead();
@@ -38,4 +38,3 @@ private:
 	int m_iHP;
 	int m_iAttack;
 };
-

@@ -8,18 +8,18 @@ void CPlayer::InitializeClass(int iChoice)
 	{
 	case 1:
 		m_ClassType = WARRIOR;
-		("Àü»ç", 150, 150, 5);
+		("ì „ì‚¬", 150, 150, 5);
 		return;
 	case 2:
 		m_ClassType = MAGICIAN;
-		("¸¶¹ı»ç", 50, 50, 15);
+		("ë§ˆë²•ì‚¬", 50, 50, 15);
 		return;
 	case 3:
 		m_ClassType = THEIF;
-		("µµÀû", 100, 100, 10);
+		("ë„ì ", 100, 100, 10);
 		return;
 	default:
-		cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù" << endl;
+		cout << "ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤" << endl;
 		return;
 	}
 }
