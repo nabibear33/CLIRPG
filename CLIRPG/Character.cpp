@@ -3,6 +3,10 @@
 
 CCharacter::CCharacter()
 {
+	strcpy_s(m_szName, sizeof(m_szName), "");
+	m_iMaxHP = 0;
+	m_iHP = 0;
+	m_iAttack = 0;
 }
 
 CCharacter::CCharacter(const char _szName[], int _iMaxHP, int _iHP, int _iAttack)

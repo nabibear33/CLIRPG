@@ -8,12 +8,12 @@ public:
 	// 생성자, 소멸자
 	CCharacter();
 	CCharacter(const char _szName[], int _iMaxHP, int _iHP, int _iAttack);
-	~CCharacter();
+	virtual ~CCharacter();
 
 	// 기본 함수
-	void Initialize();
-	void Update();
-	void Release();
+	virtual void Initialize();
+	virtual void Update();
+	virtual void Release();
 
 	// Get, Set
 	char* GetName();
@@ -30,7 +30,7 @@ public:
 	bool IsDead();
 	void Revive();
 
-	// virtual void InitializeClass(int iChoice);
+	virtual void InitializeClass(int iChoice) {}
 
 private:
 	char m_szName[MAX_NAME_SIZE];

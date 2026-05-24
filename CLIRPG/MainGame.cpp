@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "MainGame.h"
 #include "Character.h"
+#include "Monster.h"
 #include "Player.h"
 #include "SaveGame.h"
 
@@ -78,24 +79,24 @@ void CMainGame::ChooseClassOrLoad()
 		{
 		case 1:
 			// 전사 직업으로 동적 할당
-			m_pPlayer = new CCharacter("전사", 150, 150, 5);
+			m_pPlayer = new CPlayer("전사", 150, 150, 5);
 			m_pPlayer->InitializeClass(iClassSelection);
 			SetGameStatus(ON_MAINMENU);
 			return;
 		case 2:
 			// 마법사 직업으로 동적 할당
-			m_pPlayer = new CCharacter("마법사", 50, 50, 15);
+			m_pPlayer = new CPlayer("마법사", 50, 50, 15);
 			m_pPlayer->InitializeClass(iClassSelection);
 			SetGameStatus(ON_MAINMENU);
 			return;
 		case 3:
 			// 도적 직업으로 동적 할당
-			m_pPlayer = new CCharacter("도적", 100, 100, 10);
+			m_pPlayer = new CPlayer("도적", 100, 100, 10);
 			m_pPlayer->InitializeClass(iClassSelection);
 			SetGameStatus(ON_MAINMENU);
 			return;
 		case 4:
-			m_pPlayer = new CCharacter;
+			m_pPlayer = new CPlayer;
 			m_pSaveManager->Load(m_pPlayer);
 			SetGameStatus(ON_MAINMENU);
 			return;
@@ -156,15 +157,15 @@ void CMainGame::OnField()
 		switch (iFieldSelection)
 		{
 		case 1:
-			m_pMonster = new CCharacter("초급 몬스터", 30, 30, 5);
+			m_pMonster = new CMonster("초급 몬스터", 30, 30, 5);
 			SetGameStatus(ON_COMBAT);
 			return;
 		case 2:
-			m_pMonster = new CCharacter("중급 몬스터", 60, 60, 7);
+			m_pMonster = new CMonster("중급 몬스터", 60, 60, 7);
 			SetGameStatus(ON_COMBAT);
 			return;
 		case 3:
-			m_pMonster = new CCharacter("고급 몬스터", 90, 90, 10);
+			m_pMonster = new CMonster("고급 몬스터", 90, 90, 10);
 			SetGameStatus(ON_COMBAT);
 			return;
 		case 4:

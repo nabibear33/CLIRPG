@@ -2,6 +2,34 @@
 #include "Player.h"
 #include "Character.h"
 
+CPlayer::CPlayer()
+	: CCharacter()
+{
+	m_ClassType = NONE;
+}
+
+CPlayer::CPlayer(const char _szName[], int _iMaxHP, int _iHP, int _iAttack)
+	: CCharacter(_szName, _iMaxHP, _iHP, _iAttack)
+{
+	m_ClassType = NONE;
+}
+
+CPlayer::~CPlayer()
+{
+}
+
+void CPlayer::Initialize()
+{
+}
+
+void CPlayer::Update()
+{
+}
+
+void CPlayer::Release()
+{
+}
+
 void CPlayer::InitializeClass(int iChoice)
 {
 	switch (iChoice)
