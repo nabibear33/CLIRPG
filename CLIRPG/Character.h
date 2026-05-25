@@ -5,26 +5,25 @@
 class CCharacter
 {
 public:
-	// 생성자, 소멸자
 	CCharacter();
 	CCharacter(const char _szName[], int _iMaxHP, int _iHP, int _iAttack);
 	virtual ~CCharacter();
 
-	// 기본 함수
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Release();
 
-	// Get, Set
+	// Getter, Settter
 	char* GetName();
 	int GetMaxHP();
 	int GetHP();
 	int GetAttack();
-	void SetName(char _szName[]);
+	void SetName(const char _szName[]);
+	void SetMaxHP(int _iMaxHP);
 	void SetHP(int _iHP);
 	void SetAttack(int _iAttack);
 
-	// 전투 관련 함수
+	// On Combat
 	void Attack(CCharacter* pCounterPart);
 	void OnDamaged(int _iAttack);
 	bool IsDead();

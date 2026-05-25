@@ -1,9 +1,10 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "MainGame.h"
 #include "Character.h"
 #include "Monster.h"
 #include "Player.h"
 #include "SaveGame.h"
+#include "Store.h"
 
 
 CMainGame::CMainGame()
@@ -11,6 +12,7 @@ CMainGame::CMainGame()
 	m_pPlayer = nullptr;
 	m_pMonster = nullptr;
 	m_pSaveManager = nullptr;
+	m_pStore = nullptr;
 }
 
 CMainGame::~CMainGame()
@@ -20,85 +22,88 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
-	// 게임 내내 살아있어야 하는 것만 동적 할당
 	m_pSaveManager = new CSaveGame;
-	m_GameStatus = CHOOSING_CLASS_OR_LOAD;
+	m_pStore = new CStore;
+	m_eGameStatus = eGameStatus::INTRO;
 }
 
 void CMainGame::Update()
 {
-	while (m_GameStatus != QUIT)
+	m_pSaveManager->Save(m_pPlayer);
+	
+	while (m_eGameStatus != eGameStatus::QUIT)
 	{
-		switch (m_GameStatus)
+		switch (m_eGameStatus)
 		{
-		case CHOOSING_CLASS_OR_LOAD:
-			ChooseClassOrLoad();
+		case eGameStatus::INTRO:
+			OnIntro();
 			break;
-		case ON_MAINMENU:
-			OnMainMenu();
+		case eGameStatus::SELECTING_START_MODE:
+			SelectStartMode();
 			break;
-		case ON_FIELD:
+		case eGameStatus::CHOOSING_CLASS:
+			ChooseClass();
+			break;
+		case eGameStatus::ON_LOBBY:
+			OnLobby();
+			break;
+		case eGameStatus::SELECTING_LEVEL:
 			OnField();
 			break;
-		case ON_COMBAT:
+		case eGameStatus::ON_COMBAT:
 			OnCombat();
+			break;
+		case eGameStatus::ON_STORE:
+			OnStore();
 			break;
 		default:
 			cout << "비정상 종료" << endl;
 			return;
 		}
 	}
-
-	// 종료 버튼을 눌렀을 때 while문 밖으로
 }
 
 void CMainGame::Release()
 {
-	SafeDeleteCharacter(m_pPlayer);
-	SafeDeleteCharacter(m_pMonster);
-	SafeDeleteSaveManager(m_pSaveManager);
+	SafeDeleteSingle(m_pPlayer);
+	SafeDeleteSingle(m_pMonster);
+	SafeDeleteSingle(m_pStore);
+	SafeDeleteSingle(m_pSaveManager);
 }
 
-void CMainGame::SetGameStatus(EGameStatus Status)
+void CMainGame::SetGameStatus(eGameStatus Status)
 {
-	m_GameStatus = Status;
+	m_eGameStatus = Status;
 }
 
-void CMainGame::ChooseClassOrLoad()
+void CMainGame::OnIntro()
+{
+	// Add Drawing Logic Later
+
+	// After eGameStatus::INTRO Drawing
+	SetGameStatus(eGameStatus::SELECTING_START_MODE);
+}
+
+void CMainGame::SelectStartMode()
 {
 	while (true)
 	{
 		system("cls");
-		cout << "1. 전사 2. 마법사 3. 도적 4. 불러오기" << endl;
-		cout << "직업을 선택하세요 : ";
+		cout << "1. 새로시작  2. 불러오기" << endl;
+		cout << "선택지를 선택하세요 : ";
 
-		int iClassSelection(0);
-		cin >> iClassSelection;
+		int iStartModeSelection(0);
+		cin >> iStartModeSelection;
 
-		switch (iClassSelection)
+		switch (iStartModeSelection)
 		{
 		case 1:
-			// 전사 직업으로 동적 할당
-			m_pPlayer = new CPlayer("전사", 150, 150, 5);
-			m_pPlayer->InitializeClass(iClassSelection);
-			SetGameStatus(ON_MAINMENU);
+			SetGameStatus(eGameStatus::CHOOSING_CLASS);
 			return;
 		case 2:
-			// 마법사 직업으로 동적 할당
-			m_pPlayer = new CPlayer("마법사", 50, 50, 15);
-			m_pPlayer->InitializeClass(iClassSelection);
-			SetGameStatus(ON_MAINMENU);
-			return;
-		case 3:
-			// 도적 직업으로 동적 할당
-			m_pPlayer = new CPlayer("도적", 100, 100, 10);
-			m_pPlayer->InitializeClass(iClassSelection);
-			SetGameStatus(ON_MAINMENU);
-			return;
-		case 4:
 			m_pPlayer = new CPlayer;
 			m_pSaveManager->Load(m_pPlayer);
-			SetGameStatus(ON_MAINMENU);
+			SetGameStatus(eGameStatus::ON_LOBBY);
 			return;
 		default:
 			cout << "유효한 입력값을 입력하세요" << endl;
@@ -108,13 +113,41 @@ void CMainGame::ChooseClassOrLoad()
 	}
 }
 
-void CMainGame::OnMainMenu()
+void CMainGame::ChooseClass()
+{
+	while (true)
+	{
+		system("cls");
+		cout << "1. 전사 2. 마법사 3. 도적" << endl;
+		cout << "직업을 선택하세요 : ";
+
+		int iClassSelection(0);
+		cin >> iClassSelection;
+
+		switch (iClassSelection)
+		{
+		case 1:
+		case 2:
+		case 3:
+			m_pPlayer = new CPlayer;
+			m_pPlayer->InitializeClass(iClassSelection);
+			SetGameStatus(eGameStatus::ON_LOBBY);
+			return;
+		default:
+			cout << "유효한 입력값을 입력하세요" << endl;
+			system("pause");
+			continue;
+		}
+	}
+}
+
+void CMainGame::OnLobby()
 {
 	while (true)
 	{
 		system("cls");
 		PrintInfo(m_pPlayer);
-		cout << "1. 사냥터  2. 저장하기  3. 게임 종료" << endl;
+		cout << "1. 사냥터  2. 상점  3. 게임 종료" << endl;
 		cout << "선택지를 입력하세요 : ";
 
 		int iMainMenuSelection(0);
@@ -123,16 +156,13 @@ void CMainGame::OnMainMenu()
 		switch (iMainMenuSelection)
 		{
 		case 1:
-			// 사냥터로 이동
-			SetGameStatus(ON_FIELD);
+			SetGameStatus(eGameStatus::SELECTING_LEVEL);
 			return;
 		case 2:
-			// 저장
-			m_pSaveManager->Save(m_pPlayer);
+			SetGameStatus(eGameStatus::ON_STORE);
 			return;
 		case 3:
-			// 게임 종료
-			SetGameStatus(QUIT);
+			SetGameStatus(eGameStatus::QUIT);
 			return;
 		default:
 			cout << "올바른 선택지를 입력하세요.";
@@ -158,18 +188,18 @@ void CMainGame::OnField()
 		{
 		case 1:
 			m_pMonster = new CMonster("초급 몬스터", 30, 30, 5);
-			SetGameStatus(ON_COMBAT);
+			SetGameStatus(eGameStatus::ON_COMBAT);
 			return;
 		case 2:
 			m_pMonster = new CMonster("중급 몬스터", 60, 60, 7);
-			SetGameStatus(ON_COMBAT);
+			SetGameStatus(eGameStatus::ON_COMBAT);
 			return;
 		case 3:
 			m_pMonster = new CMonster("고급 몬스터", 90, 90, 10);
-			SetGameStatus(ON_COMBAT);
+			SetGameStatus(eGameStatus::ON_COMBAT);
 			return;
 		case 4:
-			SetGameStatus(ON_MAINMENU);
+			SetGameStatus(eGameStatus::ON_LOBBY);
 			return;
 		default:
 			cout << "올바른 선택지를 입력하세요." << endl;
@@ -224,11 +254,11 @@ void CMainGame::CombatSingleTurn()
 		PrintInfo(m_pMonster);
 
 		cout << "승리!" << endl;
-		SafeDeleteCharacter(m_pMonster);
+		SafeDeleteSingle(m_pMonster);
 
 		system("pause");
 
-		SetGameStatus(ON_FIELD);
+		SetGameStatus(eGameStatus::SELECTING_LEVEL);
 		return;
 	}
 
@@ -242,20 +272,30 @@ void CMainGame::CombatSingleTurn()
 		PrintInfo(m_pMonster);
 
 		cout << "패배" << endl;
-		SafeDeleteCharacter(m_pMonster);
+		SafeDeleteSingle(m_pMonster);
 
 		system("pause");
 
 		m_pPlayer->Revive();
-		SetGameStatus(ON_FIELD);
+		SetGameStatus(eGameStatus::SELECTING_LEVEL);
 		return;
 	}
 }
 
 void CMainGame::RunAway()
 {
-	SafeDeleteCharacter(m_pMonster);
-	SetGameStatus(ON_FIELD);
+	SafeDeleteSingle(m_pMonster);
+	SetGameStatus(eGameStatus::SELECTING_LEVEL);
+}
+
+void CMainGame::OnStore()
+{
+	while (true)
+	{
+		system("cls");
+		cout << "============== 상점 ================" << endl;
+		m_pStore->PrintItems();
+	}
 }
 
 void CMainGame::PrintInfo(CCharacter* _pCharacter)
@@ -272,16 +312,4 @@ void CMainGame::PrintInfo(CCharacter* _pCharacter)
 		cout << "================================" << endl;
 		cout << "플레이어(몬스터) 정보가 없습니다" << endl;
 	}
-}
-
-void CMainGame::SafeDeleteCharacter(CCharacter*& p)
-{
-	delete p;
-	p = nullptr;
-}
-
-void CMainGame::SafeDeleteSaveManager(CSaveGame*& p)
-{
-	delete p;
-	p = nullptr;
 }

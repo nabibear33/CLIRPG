@@ -6,11 +6,12 @@
 
 using namespace std;
 
-// const 상수
+// constants
 const int MAX_NAME_SIZE = 20;
+const int MAX_DETAIL_SIZE = 100;
 const char PATH[] = "save.dat";
 
-// 메모리 검사
+// Memory Debugging
 #ifdef _DEBUG
 
 #define _CRTDBG_MAP_ALLOC
@@ -25,3 +26,24 @@ const char PATH[] = "save.dat";
 #endif
 
 #endif //PCH_H
+
+
+
+
+
+
+
+/*
+
+	virtual void Initialize();
+	virtual void Update();
+	virtual void Release();
+
+
+	virtual void Initialize() override;
+	virtual void Update() override;
+	virtual void Release() override;
+
+
+
+*/

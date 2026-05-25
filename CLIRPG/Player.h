@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Types.h"
 
+class Item;
 
 class CPlayer : public CCharacter
 {
@@ -11,13 +12,15 @@ public:
 	CPlayer(const char _szName[], int _iMaxHP, int _iHP, int _iAttack);
 	virtual ~CPlayer();
 
-	virtual void Initialize() override;
-	virtual void Update() override;
-	virtual void Release() override;
+	virtual void Initialize();
+	virtual void Update();
+	virtual void Release();
 
-	void InitializeClass(int iChoice);
+	virtual void InitializeClass(int iChoice);
 
 private:
-	EClassType m_ClassType;
+	ePlayerClassType m_ePlayerClassType;
+
+	Item* Items;
 };
 

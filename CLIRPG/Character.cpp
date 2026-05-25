@@ -54,9 +54,14 @@ int CCharacter::GetAttack()
 	return m_iAttack;
 }
 
-void CCharacter::SetName(char _szName[])
+void CCharacter::SetName(const char _szName[])
 {
 	strcpy_s(m_szName, sizeof(m_szName), _szName);
+}
+
+void CCharacter::SetMaxHP(int _iMaxHP)
+{
+	m_iMaxHP = _iMaxHP;
 }
 
 void CCharacter::SetHP(int _iHP)

@@ -12,6 +12,18 @@ CSaveGame::~CSaveGame()
 
 }
 
+void CSaveGame::Initialize()
+{
+}
+
+void CSaveGame::Update()
+{
+}
+
+void CSaveGame::Release()
+{
+}
+
 void CSaveGame::Save(CCharacter* pPlayer)
 {
 	// 파일로 저장

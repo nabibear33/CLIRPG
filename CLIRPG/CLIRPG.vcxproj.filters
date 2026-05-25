@@ -19,14 +19,20 @@
     <Filter Include="Source Files\Character">
       <UniqueIdentifier>{ef3549ba-525b-455d-8568-0aa6529815fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Manager">
-      <UniqueIdentifier>{292053fa-3739-42dd-ac25-e8463e231be4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Character">
       <UniqueIdentifier>{34a4918a-e842-4de1-b610-7ffa61e49cfe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Manager">
+    <Filter Include="Source Files\Item">
+      <UniqueIdentifier>{bf621cae-a9a2-43cd-94dc-7f174d6f2986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{292053fa-3739-42dd-ac25-e8463e231be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
       <UniqueIdentifier>{9938de80-1e20-4086-a037-1fba61fc4da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Item">
+      <UniqueIdentifier>{da5c4279-38ba-4111-9366-3728081371f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,10 +52,28 @@
       <Filter>Source Files\Character</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
-      <Filter>Source Files\Manager</Filter>
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="SaveGame.cpp">
-      <Filter>Source Files\Manager</Filter>
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Equipment.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Consumable.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Store.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +93,25 @@
       <Filter>Header Files\Character</Filter>
     </ClInclude>
     <ClInclude Include="MainGame.h">
-      <Filter>Header Files\Manager</Filter>
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="SaveGame.h">
-      <Filter>Header Files\Manager</Filter>
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Equipment.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumable.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Store.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
