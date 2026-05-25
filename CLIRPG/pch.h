@@ -1,8 +1,15 @@
-#ifndef PCH_H
-#define PCH_H
+#pragma once
 
 #include <iostream>
 #include <string.h>
+
+// STLs
+#include <map>
+#include <vector> 
+
+// Utils
+#include "Types.h"
+#include "Enum.h"
 
 using namespace std;
 
@@ -24,8 +31,6 @@ const char PATH[] = "save.dat";
 
 #endif
 #endif
-
-#endif //PCH_H
 
 
 

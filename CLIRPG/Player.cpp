@@ -1,16 +1,19 @@
 ﻿#include "pch.h"
 #include "Player.h"
 #include "Character.h"
+#include "Inventory.h"
 
 CPlayer::CPlayer()
 	: CCharacter()
 {
+	m_Inventory = nullptr;
 	m_ePlayerClassType = ePlayerClassType::NONE;
 }
 
-CPlayer::CPlayer(const char _szName[], int _iMaxHP, int _iHP, int _iAttack)
-	: CCharacter(_szName, _iMaxHP, _iHP, _iAttack)
+CPlayer::CPlayer(const char szName[], int iMaxHP, int iHP, int iAttack)
+	: CCharacter(szName, iMaxHP, iHP, iAttack)
 {
+	m_Inventory = nullptr;
 	m_ePlayerClassType = ePlayerClassType::NONE;
 }
 
@@ -20,6 +23,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
+	m_Inventory = new CInventory;
 }
 
 void CPlayer::Update()
@@ -59,4 +63,14 @@ void CPlayer::InitializeClass(int iChoice)
 	default:
 		return;
 	}
+}
+
+void CPlayer::Sell(CItem* Item)
+{
+	// m_Inventory->RemoveItem(Item);
+}
+
+void CPlayer::Buy(CItem* Item)
+{
+	m_Inventory->AddItem(Item);
 }

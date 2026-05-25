@@ -4,11 +4,13 @@
 CMonster::CMonster()
 	: CCharacter()
 {
+	m_iGold = 0;
 }
 
-CMonster::CMonster(const char _szName[], int _iMaxHP, int _iHP, int _iAttack)
-	: CCharacter(_szName, _iMaxHP, _iHP, _iAttack)
+CMonster::CMonster(const char szName[], int iMaxHP, int iHP, int iAttack, int iGold)
+	: CCharacter(szName, iMaxHP, iHP, iAttack)
 {
+	m_iGold = iGold;
 }
 
 CMonster::~CMonster()

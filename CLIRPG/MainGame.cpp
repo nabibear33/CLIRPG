@@ -146,7 +146,7 @@ void CMainGame::OnLobby()
 	while (true)
 	{
 		system("cls");
-		PrintInfo(m_pPlayer);
+		m_pPlayer->PrintInfo();
 		cout << "1. 사냥터  2. 상점  3. 게임 종료" << endl;
 		cout << "선택지를 입력하세요 : ";
 
@@ -177,7 +177,7 @@ void CMainGame::OnField()
 	while (true)
 	{
 		system("cls");
-		PrintInfo(m_pPlayer);
+		m_pPlayer->PrintInfo();
 		cout << "1. 초급  2. 중급  3. 고급  4. 돌아가기" << endl;
 		cout << "선택지를 입력하세요 : ";
 
@@ -187,15 +187,15 @@ void CMainGame::OnField()
 		switch (iFieldSelection)
 		{
 		case 1:
-			m_pMonster = new CMonster("초급 몬스터", 30, 30, 5);
+			m_pMonster = new CMonster("초급 몬스터", 30, 30, 5, 10);
 			SetGameStatus(eGameStatus::ON_COMBAT);
 			return;
 		case 2:
-			m_pMonster = new CMonster("중급 몬스터", 60, 60, 7);
+			m_pMonster = new CMonster("중급 몬스터", 60, 60, 7, 20);
 			SetGameStatus(eGameStatus::ON_COMBAT);
 			return;
 		case 3:
-			m_pMonster = new CMonster("고급 몬스터", 90, 90, 10);
+			m_pMonster = new CMonster("고급 몬스터", 90, 90, 10, 30);
 			SetGameStatus(eGameStatus::ON_COMBAT);
 			return;
 		case 4:
@@ -215,8 +215,8 @@ void CMainGame::OnCombat()
 	{
 		system("cls");
 
-		PrintInfo(m_pPlayer);
-		PrintInfo(m_pMonster);
+		m_pPlayer->PrintInfo();
+		m_pMonster->PrintInfo();
 
 		cout << "1. 공격 2. 도망" << endl;
 		cout << "선택지를 입력하세요 : ";
@@ -227,11 +227,9 @@ void CMainGame::OnCombat()
 		switch (iCombatSelection)
 		{
 		case 1:
-			// 공격 주고받기
 			CombatSingleTurn();
 			return;
 		case 2:
-			// 현재 대치중인 몬스터 메모리 반환 & 필드로 돌아가기
 			RunAway();
 			return;
 		default:
@@ -244,14 +242,13 @@ void CMainGame::OnCombat()
 
 void CMainGame::CombatSingleTurn()
 {
-	// 플레이어 선공
 	m_pPlayer->Attack(m_pMonster);
 	if (m_pMonster->IsDead())
 	{
 		system("cls");
 
-		PrintInfo(m_pPlayer);
-		PrintInfo(m_pMonster);
+		m_pPlayer->PrintInfo();
+		m_pMonster->PrintInfo();
 
 		cout << "승리!" << endl;
 		SafeDeleteSingle(m_pMonster);
@@ -262,14 +259,13 @@ void CMainGame::CombatSingleTurn()
 		return;
 	}
 
-	// 몬스터 후공
 	m_pMonster->Attack(m_pPlayer);
 	if (m_pPlayer->IsDead())
 	{
 		system("cls");
 
-		PrintInfo(m_pPlayer);
-		PrintInfo(m_pMonster);
+		m_pPlayer->PrintInfo();
+		m_pMonster->PrintInfo();
 
 		cout << "패배" << endl;
 		SafeDeleteSingle(m_pMonster);
@@ -295,21 +291,29 @@ void CMainGame::OnStore()
 		system("cls");
 		cout << "============== 상점 ================" << endl;
 		m_pStore->PrintItems();
-	}
-}
+		
+		cout << "0. 뒤로 가기" << endl;
+		cout << "선택지를 입력하세요 : ";
+		int iItemSelection;
+		cin >> iItemSelection;
 
-void CMainGame::PrintInfo(CCharacter* _pCharacter)
-{
-	if (_pCharacter != nullptr)
-	{
-		cout << "================================" << endl;
-		cout << "이름 : " << _pCharacter->GetName() << endl;
-		cout << "체력 : " << _pCharacter->GetHP() << "\t"
-			<< "공격력 : " << _pCharacter->GetAttack() << endl;
-	}
-	else
-	{
-		cout << "================================" << endl;
-		cout << "플레이어(몬스터) 정보가 없습니다" << endl;
+		if (m_pStore->IsValidItemChoice(iItemSelection))
+		{
+			switch (iItemSelection)
+			{
+			case 0:
+				SetGameStatus(eGameStatus::ON_LOBBY);
+				return;
+			default:
+				// m_pPlayer->Buy(iItemSelection);
+				return;
+			}
+		}
+		else
+		{
+			cout << "올바른 선택지를 입력하세요" << endl;
+			system("pause");
+			continue;
+		}		
 	}
 }

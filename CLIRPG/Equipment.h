@@ -1,23 +1,38 @@
 #pragma once
+
 #include "Item.h"
-#include "Types.h"
+#include "pch.h"
+
+class CPlayer;
 
 class CEquipment : public CItem
 {
 public:
 	CEquipment();
+	CEquipment(
+		eItemCode _eItemCode,
+		eEquipmentType _eEquipmentType,
+		const char szName[],
+		const char szDetail[],
+		int iBuyPrice,
+		int iSellPrice,
+		int iHP,
+		int iAttack
+	);
 	virtual ~CEquipment();
 
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Release();
 
-	void Equip();
+	void Equip(CPlayer* pPlayer);
+
+	virtual void PrintItemInfo(bool bPrintPrice) override;
 
 private:
 	eEquipmentType m_eEquipmentType;
 
-	int iHP;
-	int iAttack;
+	int m_iHP;
+	int m_iAttack;
 };
 

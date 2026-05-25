@@ -1,5 +1,7 @@
 #pragma once
 
+#include "pch.h"
+
 class CItem;
 class CPlayer;
 
@@ -13,16 +15,11 @@ public:
 	virtual void Update();
 	virtual void Release();
 
-	void Sell(CPlayer* Player, CItem* Item);
-	void Buy(CPlayer* Player, CItem* Item);
+	bool IsValidItemChoice(int iChoice);
 
 	void PrintItems();
 
 private:
-	CItem* Equipments;
-	CItem* Consumables;
-
-	int iCurrentTab = 0;
-
+	vector<CItem*> m_Items;
 };
 

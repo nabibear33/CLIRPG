@@ -90,11 +90,10 @@ bool CCharacter::IsDead()
 	return m_iHP == 0;
 }
 
-void CCharacter::Revive()
+void CCharacter::PrintInfo()
 {
-	m_iHP = m_iMaxHP;
+	cout << "================================" << endl;
+	cout << "이름 : " << GetName() << endl;
+	cout << "체력 : " << GetHP() << "\t"
+		 << "공격력 : " << GetAttack() << endl;
 }
-
-//void CCharacter::InitializeClass(int iChoice)
-//{
-//}

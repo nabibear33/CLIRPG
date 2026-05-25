@@ -1,7 +1,6 @@
 #pragma once
 
 #include "pch.h"
-#include "Types.h"
 #include "Memory.h"
 
 
@@ -47,9 +46,6 @@ public:
 
 	// eGameStatus : ON_STORE
 	void OnStore();
-
-	// TODO : migrate to another class later
-	void PrintInfo(CCharacter* _pCharacter);
 
 private:
 	// Global State

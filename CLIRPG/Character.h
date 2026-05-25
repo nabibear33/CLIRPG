@@ -27,9 +27,12 @@ public:
 	void Attack(CCharacter* pCounterPart);
 	void OnDamaged(int _iAttack);
 	bool IsDead();
-	void Revive();
+	virtual void OnDead() {}
+	virtual void Revive() {}
 
 	virtual void InitializeClass(int iChoice) {}
+
+	void PrintInfo();
 
 private:
 	char m_szName[MAX_NAME_SIZE];

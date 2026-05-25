@@ -1,15 +1,16 @@
 #pragma once
 
 #include "Character.h"
-#include "Types.h"
+#include "pch.h"
 
-class Item;
+class CInventory;
+class CItem;
 
 class CPlayer : public CCharacter
 {
 public:
 	CPlayer();
-	CPlayer(const char _szName[], int _iMaxHP, int _iHP, int _iAttack);
+	CPlayer(const char szName[], int iMaxHP, int iHP, int iAttack);
 	virtual ~CPlayer();
 
 	virtual void Initialize();
@@ -18,9 +19,12 @@ public:
 
 	virtual void InitializeClass(int iChoice);
 
+	void Sell(CItem* Item);
+	void Buy(CItem* Item);
+
 private:
 	ePlayerClassType m_ePlayerClassType;
 
-	Item* Items;
+	CInventory* m_Inventory;
 };
 

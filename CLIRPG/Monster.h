@@ -6,7 +6,12 @@ class CMonster : public CCharacter
 {
 public:
 	CMonster();
-	CMonster(const char _szName[], int _iMaxHP, int _iHP, int _iAttack);
+	CMonster(
+		const char szName[],
+		int iMaxHP,
+		int iHP,
+		int iAttack,
+		int iGold);
 	virtual ~CMonster();
 
 	virtual void Initialize();
@@ -14,6 +19,6 @@ public:
 	virtual void Release();
 
 private:
-
+	int m_iGold;
 };
 

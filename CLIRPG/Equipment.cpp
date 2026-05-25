@@ -1,8 +1,20 @@
 #include "pch.h"
 #include "Equipment.h"
+#include "Player.h"
 
-CEquipment::CEquipment()
+CEquipment::CEquipment() : CItem()
 {
+	m_eEquipmentType = eEquipmentType::NONE;
+	m_iHP = 0;
+	m_iAttack = 0;
+}
+
+CEquipment::CEquipment(eItemCode _eItemCode, eEquipmentType _eEquipmentType, const char szName[], const char szDetail[], int iBuyPrice, int iSellPrice, int iHP, int iAttack)
+	: CItem(_eItemCode, eItemType::EQUIPMENT, szName, szDetail, iBuyPrice, iSellPrice)
+{
+	m_eEquipmentType = _eEquipmentType;
+	m_iHP = iHP;
+	m_iAttack = iAttack;
 }
 
 CEquipment::~CEquipment()
@@ -21,6 +33,13 @@ void CEquipment::Release()
 {
 }
 
-void CEquipment::Equip()
+void CEquipment::Equip(CPlayer* pPlayer)
 {
+}
+
+void CEquipment::PrintItemInfo(bool bPrintPrice)
+{
+	CItem::PrintItemInfo(bPrintPrice);
+	cout << "체력 증가량 : " << m_iHP << "\t";
+	cout << "공격력 증가량 : " << m_iAttack << "\t";
 }
