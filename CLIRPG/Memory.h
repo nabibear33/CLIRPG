@@ -3,14 +3,14 @@
 #include "pch.h"
 
 template<class T>
-void SafeDeleteSingle(T* p)
+void SafeDeleteSingle(T*& p)
 {
 	delete p;
 	p = nullptr;
 }
 
 template<class T>
-void SafeDeleteArray(T* p, int iSize)
+void SafeDeleteArray(T*& p, int iSize)
 {
 	for (int i = 0; i < iSize; ++i)
 	{
@@ -21,4 +21,3 @@ void SafeDeleteArray(T* p, int iSize)
 	delete[] p;
 	p = nullptr;
 }
-

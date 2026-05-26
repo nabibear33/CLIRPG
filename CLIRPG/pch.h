@@ -6,6 +6,8 @@
 // STLs
 #include <map>
 #include <vector> 
+#include <algorithm>
+#include <random>
 
 // Utils
 #include "Types.h"

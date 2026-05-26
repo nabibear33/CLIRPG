@@ -31,3 +31,9 @@ void CConsumable::Release()
 void CConsumable::Consume()
 {
 }
+
+void CConsumable::PrintItemInfo(eStoreTab StoreTab)
+{
+	CItem::PrintItemInfo(StoreTab);
+	cout << "HP È¸º¹·® : " << m_iHP << endl;
+}

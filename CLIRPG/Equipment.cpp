@@ -37,9 +37,9 @@ void CEquipment::Equip(CPlayer* pPlayer)
 {
 }
 
-void CEquipment::PrintItemInfo(bool bPrintPrice)
+void CEquipment::PrintItemInfo(eStoreTab StoreTab)
 {
-	CItem::PrintItemInfo(bPrintPrice);
-	cout << "체력 증가량 : " << m_iHP << "\t";
-	cout << "공격력 증가량 : " << m_iAttack << "\t";
+	CItem::PrintItemInfo(StoreTab);
+	cout << "체력 증가량 : " << m_iHP << endl;
+	cout << "공격력 증가량 : " << m_iAttack << endl;
 }

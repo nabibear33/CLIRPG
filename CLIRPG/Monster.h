@@ -18,6 +18,10 @@ public:
 	virtual void Update();
 	virtual void Release();
 
+	int GetGold();
+
+	virtual void OnDead() override;
+
 private:
 	int m_iGold;
 };

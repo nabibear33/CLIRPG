@@ -4,6 +4,7 @@
 
 class CItem;
 class CPlayer;
+class CInventory;
 
 class CStore
 {
@@ -15,11 +16,16 @@ public:
 	virtual void Update();
 	virtual void Release();
 
-	bool IsValidItemChoice(int iChoice);
+	CInventory* GetInventory();
+	eStoreTab GetCurrentTab();
+	void SetCurrentTab(eStoreTab StoreTab);
 
-	void PrintItems();
+	void SellItem(CPlayer* Player, CItem* Item);
+
 
 private:
-	vector<CItem*> m_Items;
+	CInventory* m_Inventory;
+
+	eStoreTab m_CurrentTab;
 };
 

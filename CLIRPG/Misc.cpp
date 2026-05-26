@@ -20,3 +20,8 @@ void CMisc::Update()
 void CMisc::Release()
 {
 }
+
+void CMisc::PrintItemInfo(eStoreTab StoreTab)
+{
+	CItem::PrintItemInfo(StoreTab);
+}

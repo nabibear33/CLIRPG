@@ -21,8 +21,10 @@ public:
 	virtual void Release();
 
 	eItemType GetItemType();
+	int GetBuyPrice();
+	int GetSellPrice();
 
-	virtual void PrintItemInfo(bool bPrintPrice);
+	virtual void PrintItemInfo(eStoreTab StoreTab);
 
 private:
 	eItemCode m_eItemCode;

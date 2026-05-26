@@ -38,6 +38,13 @@ enum class eEquipmentType
 	WEAPON,
 };
 
+enum class eStoreTab
+{
+	NONE = 0,
+	BUY,
+	SELL,
+};
+
 enum class eItemCode
 {
 	// Equipment

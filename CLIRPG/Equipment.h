@@ -27,7 +27,7 @@ public:
 
 	void Equip(CPlayer* pPlayer);
 
-	virtual void PrintItemInfo(bool bPrintPrice) override;
+	virtual void PrintItemInfo(eStoreTab StoreTab) override;
 
 private:
 	eEquipmentType m_eEquipmentType;

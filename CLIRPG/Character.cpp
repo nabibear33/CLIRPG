@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Character.h"
 
 CCharacter::CCharacter()
@@ -74,6 +74,11 @@ void CCharacter::SetAttack(int _iAttack)
 	m_iAttack = _iAttack;
 }
 
+CInventory* CCharacter::GetInventory()
+{
+	return nullptr;
+}
+
 void CCharacter::Attack(CCharacter* pCounterPart)
 {
 	pCounterPart->OnDamaged(m_iAttack);
@@ -90,10 +95,18 @@ bool CCharacter::IsDead()
 	return m_iHP == 0;
 }
 
+void CCharacter::Sell(CItem* Item)
+{
+}
+
+void CCharacter::Buy(CStore* Store, CItem* Item)
+{
+}
+
 void CCharacter::PrintInfo()
 {
 	cout << "================================" << endl;
-	cout << "이름 : " << GetName() << endl;
-	cout << "체력 : " << GetHP() << "\t"
-		 << "공격력 : " << GetAttack() << endl;
+	cout << "이름 : " << m_szName << endl;
+	cout << "체력 : " << m_iHP << "\t"
+		 << "공격력 : " << m_iAttack << endl;
 }

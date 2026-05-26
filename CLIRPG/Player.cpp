@@ -1,7 +1,10 @@
-ï»¿#include "pch.h"
+#include "pch.h"
 #include "Player.h"
 #include "Character.h"
 #include "Inventory.h"
+#include "Store.h"
+#include "Item.h"
+#include "Memory.h"
 
 CPlayer::CPlayer()
 	: CCharacter()
@@ -19,6 +22,7 @@ CPlayer::CPlayer(const char szName[], int iMaxHP, int iHP, int iAttack)
 
 CPlayer::~CPlayer()
 {
+	SafeDeleteSingle(m_Inventory);
 }
 
 void CPlayer::Initialize()
@@ -40,21 +44,21 @@ void CPlayer::InitializeClass(int iChoice)
 	{
 	case 1:
 		m_ePlayerClassType = ePlayerClassType::WARRIOR;
-		SetName("ì „ì‚¬");
+		SetName("Àü»ç");
 		SetMaxHP(150);
 		SetHP(150);
 		SetAttack(5);
 		return;
 	case 2:
 		m_ePlayerClassType = ePlayerClassType::MAGICIAN;
-		SetName("ë§ˆë²•ì‚¬");
+		SetName("¸¶¹ý»ç");
 		SetMaxHP(50);
 		SetHP(50);
 		SetAttack(15);
 		return;
 	case 3:
 		m_ePlayerClassType = ePlayerClassType::THEIF;
-		SetName("ë„ì ");
+		SetName("µµÀû");
 		SetMaxHP(100);
 		SetHP(100);
 		SetAttack(10);
@@ -67,10 +71,25 @@ void CPlayer::InitializeClass(int iChoice)
 
 void CPlayer::Sell(CItem* Item)
 {
-	// m_Inventory->RemoveItem(Item);
+	m_Inventory->UpdateGold(Item->GetSellPrice());
+	m_Inventory->RemoveItem(Item);
 }
 
-void CPlayer::Buy(CItem* Item)
+void CPlayer::Buy(CStore* Store, CItem* Item)
 {
-	m_Inventory->AddItem(Item);
+	if (Item->GetBuyPrice() <= m_Inventory->GetCurrentGold())
+	{
+		Store->SellItem(this, Item);
+		m_Inventory->AddItem(Item);
+	}
+	else
+	{
+		cout << "°ñµå°¡ ºÎÁ·ÇÏ¿© ¾ÆÀÌÅÛÀ» ±¸¸ÅÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
+		system("pause");
+	}
+}
+
+CInventory* CPlayer::GetInventory()
+{
+	return m_Inventory;
 }

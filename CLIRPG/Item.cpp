@@ -43,11 +43,29 @@ eItemType CItem::GetItemType()
 	return m_eItemType;
 }
 
-void CItem::PrintItemInfo(bool bPrintPrice)
+int CItem::GetBuyPrice()
 {
-	cout << "[" << Enum::EnumToString(m_eItemType) << "] " << m_szName << "\t";
-	if (bPrintPrice)
+	return m_iBuyPrice;
+}
+
+int CItem::GetSellPrice()
+{
+	return m_iSellPrice;
+}
+
+void CItem::PrintItemInfo(eStoreTab StoreTab)
+{
+	cout << "[" << Enum::EnumToString(m_eItemType) << "] " << m_szName << endl;
+	cout << m_szDetail << endl;
+	switch (StoreTab)
 	{
-		cout << "판매가 : " << m_iSellPrice << "\t";
+	case eStoreTab::NONE:
+		break;
+	case eStoreTab::BUY:
+		cout << "구매 가격 : " << m_iBuyPrice << "골드" << endl;
+		break;
+	case eStoreTab::SELL:
+		cout << "판매 가격 : " << m_iSellPrice << "골드" << endl;
+		break;
 	}
 }

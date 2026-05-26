@@ -19,8 +19,10 @@ public:
 
 	virtual void InitializeClass(int iChoice);
 
-	void Sell(CItem* Item);
-	void Buy(CItem* Item);
+	virtual void Sell(CItem* Item);
+	virtual void Buy(CStore* Store, CItem* Item);
+
+	virtual CInventory* GetInventory() override;
 
 private:
 	ePlayerClassType m_ePlayerClassType;

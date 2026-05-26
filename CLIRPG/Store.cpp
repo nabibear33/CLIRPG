@@ -1,17 +1,24 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Store.h"
 #include "Item.h"
+#include "Inventory.h"
+#include "Player.h"
+#include "Memory.h"
 
 CStore::CStore()
 {
+	m_Inventory = nullptr;
+	m_CurrentTab = eStoreTab::NONE;
 }
 
 CStore::~CStore()
 {
+	SafeDeleteSingle(m_Inventory);
 }
 
 void CStore::Initialize()
 {
+	m_Inventory = new CInventory;
 }
 
 void CStore::Update()
@@ -22,15 +29,24 @@ void CStore::Release()
 {
 }
 
-bool CStore::IsValidItemChoice(int iChoice)
+CInventory* CStore::GetInventory()
 {
-	return (iChoice <= m_Items.size()) && (iChoice >= 0);
+	return m_Inventory;
 }
 
-void CStore::PrintItems()
+eStoreTab CStore::GetCurrentTab()
 {
-	for (auto Item : m_Items)
-	{
-		Item->PrintItemInfo(true);
-	}
+	return m_CurrentTab;
+}
+
+void CStore::SetCurrentTab(eStoreTab StoreTab)
+{
+	m_CurrentTab = StoreTab;
+}
+
+void CStore::SellItem(CPlayer* Player, CItem* Item)
+{
+	m_Inventory->RemoveItem(Item);
+	Player->GetInventory()->AddItem(Item);
+	Player->GetInventory()->UpdateGold(-Item->GetBuyPrice());
 }

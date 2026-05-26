@@ -32,12 +32,11 @@ public:
 	// eGameStatus : CHOOSING_CLASS
 	void ChooseClass();
 	
-
-	// eGameStatus : ON_MAINMENU
+	// eGameStatus : ON_LOBBY
 	void OnLobby();
 
 	// eGameStatus : SELECTING_LEVEL
-	void OnField();
+	void SelectLevel();
 
 	// eGameStatus : ON_COMBAT
 	void OnCombat();

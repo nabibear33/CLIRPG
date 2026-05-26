@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "SaveGame.h"
 #include "Store.h"
+#include "Inventory.h"
 
 
 CMainGame::CMainGame()
@@ -24,12 +25,16 @@ void CMainGame::Initialize()
 {
 	m_pSaveManager = new CSaveGame;
 	m_pStore = new CStore;
+	m_pStore->Initialize();
 	m_eGameStatus = eGameStatus::INTRO;
 }
 
 void CMainGame::Update()
 {
-	m_pSaveManager->Save(m_pPlayer);
+	if (m_pPlayer)
+	{
+		m_pSaveManager->Save(m_pPlayer);
+	}
 	
 	while (m_eGameStatus != eGameStatus::QUIT)
 	{
@@ -48,7 +53,7 @@ void CMainGame::Update()
 			OnLobby();
 			break;
 		case eGameStatus::SELECTING_LEVEL:
-			OnField();
+			SelectLevel();
 			break;
 		case eGameStatus::ON_COMBAT:
 			OnCombat();
@@ -103,6 +108,7 @@ void CMainGame::SelectStartMode()
 		case 2:
 			m_pPlayer = new CPlayer;
 			m_pSaveManager->Load(m_pPlayer);
+			m_pPlayer->Initialize();
 			SetGameStatus(eGameStatus::ON_LOBBY);
 			return;
 		default:
@@ -131,6 +137,7 @@ void CMainGame::ChooseClass()
 		case 3:
 			m_pPlayer = new CPlayer;
 			m_pPlayer->InitializeClass(iClassSelection);
+			m_pPlayer->Initialize();
 			SetGameStatus(eGameStatus::ON_LOBBY);
 			return;
 		default:
@@ -172,7 +179,7 @@ void CMainGame::OnLobby()
 	}
 }
 
-void CMainGame::OnField()
+void CMainGame::SelectLevel()
 {
 	while (true)
 	{
@@ -290,30 +297,93 @@ void CMainGame::OnStore()
 	{
 		system("cls");
 		cout << "============== 상점 ================" << endl;
-		m_pStore->PrintItems();
-		
-		cout << "0. 뒤로 가기" << endl;
-		cout << "선택지를 입력하세요 : ";
-		int iItemSelection;
-		cin >> iItemSelection;
+		cout << "보유 중인 골드 : " << m_pPlayer->GetInventory()->GetCurrentGold() << endl;
 
-		if (m_pStore->IsValidItemChoice(iItemSelection))
+		switch (m_pStore->GetCurrentTab())
 		{
-			switch (iItemSelection)
+		case eStoreTab::NONE:
+			cout << "0. 뒤로 가기  1. 구매  2. 판매" << endl;
+			cout << "선택지를 입력하세요 : ";
+			int iTabSelection;
+			cin >> iTabSelection;
+
+			switch (iTabSelection)
 			{
+			case 1:
+				m_pStore->SetCurrentTab(eStoreTab::BUY);
+				continue;
+			case 2:
+				m_pStore->SetCurrentTab(eStoreTab::SELL);
+				continue;
 			case 0:
 				SetGameStatus(eGameStatus::ON_LOBBY);
 				return;
 			default:
-				// m_pPlayer->Buy(iItemSelection);
-				return;
+				cout << "올바른 선택지를 입력하세요." << endl;
+				system("pause");
+				continue;
 			}
-		}
-		else
-		{
-			cout << "올바른 선택지를 입력하세요" << endl;
+			break;
+
+		case eStoreTab::BUY:
+			m_pStore->GetInventory()->PrintItems(m_pStore->GetCurrentTab());
+			cout << "0. 뒤로 가기" << endl;
+			cout << "메뉴를 선택하거나 해당되는 아이템 번호를 입력하세요 : ";
+			int iBuyItemSelection;
+			cin >> iBuyItemSelection;
+
+			if (iBuyItemSelection == 0)
+			{
+				m_pStore->SetCurrentTab(eStoreTab::NONE);
+				continue;
+			}
+			else if (CItem* Item = m_pStore->GetInventory()->GetItemFromSelection(iBuyItemSelection))
+			{
+				m_pPlayer->Buy(m_pStore, Item);
+				cout << "아이템 구매 완료" << endl;
+				system("pause");
+				continue;
+			}
+			else
+			{
+				cout << "유효한 입력값을 입력하세요" << endl;
+				system("pause");
+				continue;
+			}
+			break;
+
+		case eStoreTab::SELL:
+			m_pPlayer->GetInventory()->PrintItems(m_pStore->GetCurrentTab());
+			cout << "0. 뒤로 가기" << endl;
+			cout << "메뉴를 선택하거나 해당되는 아이템 번호를 입력하세요 : ";
+			int iSellItemSelection;
+			cin >> iSellItemSelection;
+
+			if (iSellItemSelection == 0)
+			{
+				m_pStore->SetCurrentTab(eStoreTab::NONE);
+				continue;
+			}
+			else if (CItem* Item = m_pPlayer->GetInventory()->GetItemFromSelection(iSellItemSelection))
+			{
+				m_pPlayer->Sell(Item);
+				cout << "아이템 판매 완료" << endl;
+				system("pause");
+				continue;
+			}
+			else
+			{
+				cout << "유효한 입력값을 입력하세요" << endl;
+				system("pause");
+				continue;
+			}
+			break;
+			
+		default:
+			cout << "상점 오류 발생" << endl;
+			SetGameStatus(eGameStatus::ON_LOBBY);
 			system("pause");
-			continue;
-		}		
+			return;
+		}
 	}
 }

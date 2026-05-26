@@ -11,6 +11,8 @@ public:
 	virtual void Update();
 	virtual void Release();
 
+	virtual void PrintItemInfo(eStoreTab StoreTab);
+
 private:
 
 };

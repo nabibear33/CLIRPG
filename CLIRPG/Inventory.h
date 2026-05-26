@@ -14,14 +14,24 @@ public:
 	virtual void Update();
 	virtual void Release();
 
-	void AddItem(CItem* Item);
-	void Render();
+	int GetItemCount();
+	void UpdateGold(int Gold);
+	void SetCurrentTab(eItemType ItemType);
+	int GetCurrentGold();
+	vector<CItem*>& GetItems();
 
+	void AddItem(CItem* pItem);
+	void RemoveItem(CItem* pItem);
+
+	CItem* GetItemFromSelection(int iSelection);
+
+	void PrintItems(eStoreTab StoreTab);
+	
 private:
-	CItem* Items;
+	vector<CItem*> m_Items;
 
 	eItemType m_CurrentTab;
 
-	int iGold;
+	int m_iGold;
 };
 

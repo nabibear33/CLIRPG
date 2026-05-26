@@ -22,6 +22,8 @@ public:
 
 	void Consume();
 
+	virtual void PrintItemInfo(eStoreTab StoreTab);
+
 private:
 	int m_iHP;
 };

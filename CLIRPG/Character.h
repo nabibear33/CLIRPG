@@ -2,6 +2,10 @@
 
 #include "pch.h"
 
+class CItem;
+class CStore;
+class CInventory;
+
 class CCharacter
 {
 public:
@@ -23,6 +27,8 @@ public:
 	void SetHP(int _iHP);
 	void SetAttack(int _iAttack);
 
+	virtual CInventory* GetInventory();
+
 	// On Combat
 	void Attack(CCharacter* pCounterPart);
 	void OnDamaged(int _iAttack);
@@ -31,6 +37,9 @@ public:
 	virtual void Revive() {}
 
 	virtual void InitializeClass(int iChoice) {}
+
+	virtual void Sell(CItem* Item);
+	virtual void Buy(CStore* Store, CItem* Item);
 
 	void PrintInfo();
 
