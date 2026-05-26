@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "pch.h"
 
@@ -10,7 +10,7 @@ class CCharacter
 {
 public:
 	CCharacter();
-	CCharacter(const char _szName[], int _iMaxHP, int _iHP, int _iAttack);
+	CCharacter(const char szName[], int iMaxHP, int iHP, int iAttack);
 	virtual ~CCharacter();
 
 	virtual void Initialize();
@@ -27,21 +27,19 @@ public:
 	void SetHP(int _iHP);
 	void SetAttack(int _iAttack);
 
-	virtual CInventory* GetInventory();
+	//virtual CInventory* GetInventory();
 
 	// On Combat
 	void Attack(CCharacter* pCounterPart);
 	void OnDamaged(int _iAttack);
 	bool IsDead();
-	virtual void OnDead() {}
-	virtual void Revive() {}
 
-	virtual void InitializeClass(int iChoice) {}
+	//virtual void InitializeClass(int iChoice) {}
 
-	virtual void Sell(CItem* Item);
-	virtual void Buy(CStore* Store, CItem* Item);
+	//virtual void Sell(CItem* Item);
+	//virtual void Buy(CStore* Store, CItem* Item);
 
-	void PrintInfo();
+	void PrintCharacterInfo();
 
 private:
 	char m_szName[MAX_NAME_SIZE];

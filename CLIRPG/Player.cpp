@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Player.h"
 #include "Character.h"
 #include "Inventory.h"
@@ -9,25 +9,25 @@
 CPlayer::CPlayer()
 	: CCharacter()
 {
-	m_Inventory = nullptr;
-	m_ePlayerClassType = ePlayerClassType::NONE;
+	m_pInventory = nullptr;
+	m_ePlayerClassType = ePlayerClassCode::NONE;
 }
 
 CPlayer::CPlayer(const char szName[], int iMaxHP, int iHP, int iAttack)
 	: CCharacter(szName, iMaxHP, iHP, iAttack)
 {
-	m_Inventory = nullptr;
-	m_ePlayerClassType = ePlayerClassType::NONE;
+	m_pInventory = nullptr;
+	m_ePlayerClassType = ePlayerClassCode::NONE;
 }
 
 CPlayer::~CPlayer()
 {
-	SafeDeleteSingle(m_Inventory);
+	SafeDeleteSingle(m_pInventory);
 }
 
 void CPlayer::Initialize()
 {
-	m_Inventory = new CInventory;
+	m_pInventory = new CInventory;
 }
 
 void CPlayer::Update()
@@ -38,27 +38,27 @@ void CPlayer::Release()
 {
 }
 
-void CPlayer::InitializeClass(int iChoice)
+void CPlayer::InitializeClass(int iSelection)
 {
-	switch (iChoice)
+	switch (iSelection)
 	{
 	case 1:
-		m_ePlayerClassType = ePlayerClassType::WARRIOR;
-		SetName("Àü»ç");
+		m_ePlayerClassType = ePlayerClassCode::WARRIOR;
+		SetName("ì „ì‚¬");
 		SetMaxHP(150);
 		SetHP(150);
 		SetAttack(5);
 		return;
 	case 2:
-		m_ePlayerClassType = ePlayerClassType::MAGICIAN;
-		SetName("¸¶¹ý»ç");
+		m_ePlayerClassType = ePlayerClassCode::MAGICIAN;
+		SetName("ë§ˆë²•ì‚¬");
 		SetMaxHP(50);
 		SetHP(50);
 		SetAttack(15);
 		return;
 	case 3:
-		m_ePlayerClassType = ePlayerClassType::THEIF;
-		SetName("µµÀû");
+		m_ePlayerClassType = ePlayerClassCode::THEIF;
+		SetName("ë„ì ");
 		SetMaxHP(100);
 		SetHP(100);
 		SetAttack(10);
@@ -69,27 +69,12 @@ void CPlayer::InitializeClass(int iChoice)
 	}
 }
 
-void CPlayer::Sell(CItem* Item)
+void CPlayer::Revive()
 {
-	m_Inventory->UpdateGold(Item->GetSellPrice());
-	m_Inventory->RemoveItem(Item);
-}
-
-void CPlayer::Buy(CStore* Store, CItem* Item)
-{
-	if (Item->GetBuyPrice() <= m_Inventory->GetCurrentGold())
-	{
-		Store->SellItem(this, Item);
-		m_Inventory->AddItem(Item);
-	}
-	else
-	{
-		cout << "°ñµå°¡ ºÎÁ·ÇÏ¿© ¾ÆÀÌÅÛÀ» ±¸¸ÅÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
-		system("pause");
-	}
+	SetHP(GetMaxHP());
 }
 
 CInventory* CPlayer::GetInventory()
 {
-	return m_Inventory;
+	return m_pInventory;
 }

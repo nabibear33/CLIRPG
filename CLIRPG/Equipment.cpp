@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Equipment.h"
 #include "Player.h"
 
@@ -37,9 +37,9 @@ void CEquipment::Equip(CPlayer* pPlayer)
 {
 }
 
-void CEquipment::PrintItemInfo(eStoreTab StoreTab)
+void CEquipment::PrintItemInfo(eStoreState _eStoreState)
 {
-	CItem::PrintItemInfo(StoreTab);
+	CItem::PrintItemInfo(_eStoreState);
 	cout << "체력 증가량 : " << m_iHP << endl;
 	cout << "공격력 증가량 : " << m_iAttack << endl;
 }

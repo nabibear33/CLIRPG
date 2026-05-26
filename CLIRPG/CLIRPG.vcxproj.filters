@@ -34,6 +34,18 @@
     <Filter Include="Header Files\Item">
       <UniqueIdentifier>{da5c4279-38ba-4111-9366-3728081371f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Logic">
+      <UniqueIdentifier>{2cd85998-7a95-4725-b240-28b9ac96f48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logic">
+      <UniqueIdentifier>{4cec6df0-ee6c-42d2-97d6-836a1bb751b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Static">
+      <UniqueIdentifier>{026e2b23-7018-497a-bc50-e45539c60568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Static">
+      <UniqueIdentifier>{39fe5dc3-68aa-4aa2-8abe-162409654013}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,12 +66,6 @@
     <ClCompile Include="MainGame.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="SaveGame.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Memory.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
@@ -72,15 +78,24 @@
     <ClCompile Include="Misc.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
     <ClCompile Include="Store.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.h">
+      <Filter>Header Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveGame.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Source Files\Static</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
@@ -93,9 +108,6 @@
       <Filter>Header Files\Character</Filter>
     </ClInclude>
     <ClInclude Include="MainGame.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SaveGame.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
@@ -111,6 +123,24 @@
       <Filter>Header Files\Item</Filter>
     </ClInclude>
     <ClInclude Include="Store.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveGame.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>

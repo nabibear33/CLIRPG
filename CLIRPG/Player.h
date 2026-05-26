@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Character.h"
 #include "pch.h"
@@ -17,16 +17,15 @@ public:
 	virtual void Update();
 	virtual void Release();
 
-	virtual void InitializeClass(int iChoice);
+	virtual void InitializeClass(int iSelection);
 
-	virtual void Sell(CItem* Item);
-	virtual void Buy(CStore* Store, CItem* Item);
+	void Revive();
 
-	virtual CInventory* GetInventory() override;
+	virtual CInventory* GetInventory();
 
 private:
-	ePlayerClassType m_ePlayerClassType;
+	ePlayerClassCode m_ePlayerClassType;
 
-	CInventory* m_Inventory;
+	CInventory* m_pInventory;
 };
 

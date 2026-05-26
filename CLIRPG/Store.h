@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "pch.h"
 
@@ -16,16 +16,26 @@ public:
 	virtual void Update();
 	virtual void Release();
 
+	void SetPlayer(CPlayer* pPlayer);
+	void SetCurrentState(eStoreState _eStoreState);
+
 	CInventory* GetInventory();
-	eStoreTab GetCurrentTab();
-	void SetCurrentTab(eStoreTab StoreTab);
-
-	void SellItem(CPlayer* Player, CItem* Item);
-
+	eStoreState GetCurrentState();
 
 private:
-	CInventory* m_Inventory;
+	void OnSelectMenu();
+	void OnBuyTab();
+	void OnSellTab();
 
-	eStoreTab m_CurrentTab;
+	void PrintHeader();
+
+	void OnPlayerBuy(CItem* pItem);
+	void OnPlayerSell(CItem* pItem);
+	
+	CInventory* m_pInventory;
+
+	eStoreState m_eCurrentState;
+
+	CPlayer* m_pPlayer;
 };
 

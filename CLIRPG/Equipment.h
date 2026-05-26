@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Item.h"
 #include "pch.h"
@@ -27,7 +27,7 @@ public:
 
 	void Equip(CPlayer* pPlayer);
 
-	virtual void PrintItemInfo(eStoreTab StoreTab) override;
+	virtual void PrintItemInfo(eStoreState _eStoreState) override;
 
 private:
 	eEquipmentType m_eEquipmentType;

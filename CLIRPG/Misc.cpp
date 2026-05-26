@@ -1,7 +1,12 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Misc.h"
 
 CMisc::CMisc()
+{
+}
+
+CMisc::CMisc(eItemCode _eItemCode, const char szName[], const char szDetail[], int iBuyPrice, int iSellPrice)
+	: CItem(_eItemCode, eItemType::MISC, szName, szDetail, iBuyPrice, iSellPrice)
 {
 }
 
@@ -21,7 +26,7 @@ void CMisc::Release()
 {
 }
 
-void CMisc::PrintItemInfo(eStoreTab StoreTab)
+void CMisc::PrintItemInfo(eStoreState _eStoreState)
 {
-	CItem::PrintItemInfo(StoreTab);
+	CItem::PrintItemInfo(_eStoreState);
 }

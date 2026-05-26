@@ -1,5 +1,4 @@
-#pragma once
-
+﻿#pragma once
 
 enum class eGameStatus
 {
@@ -12,14 +11,6 @@ enum class eGameStatus
 	ON_COMBAT,
 	ON_STORE,
 	QUIT,
-};
-
-enum class ePlayerClassType
-{
-	NONE = 0,
-	WARRIOR,
-	MAGICIAN,
-	THEIF,
 };
 
 enum class eItemType
@@ -38,11 +29,13 @@ enum class eEquipmentType
 	WEAPON,
 };
 
-enum class eStoreTab
+enum class eStoreState
 {
 	NONE = 0,
-	BUY,
-	SELL,
+	ON_MENU,
+	ON_BUYING,
+	ON_SELLING,
+	EXIT,
 };
 
 enum class eItemCode
@@ -65,4 +58,22 @@ enum class eItemCode
 	MISC_DROP_NORMAL,
 	MISC_DROP_HARD,
 	MISC_MAX,
+};
+
+enum class ePlayerClassCode
+{
+	NONE = 0,
+	WARRIOR,
+	MAGICIAN,
+	THEIF,
+	MAX,
+};
+
+enum class eMonsterCode
+{
+	NONE,
+	EASY,
+	NORMAL,
+	HARD,
+	MAX,
 };

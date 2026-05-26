@@ -9,17 +9,16 @@ CCharacter::CCharacter()
 	m_iAttack = 0;
 }
 
-CCharacter::CCharacter(const char _szName[], int _iMaxHP, int _iHP, int _iAttack)
+CCharacter::CCharacter(const char szName[], int iMaxHP, int iHP, int iAttack)
 {
-	strcpy_s(m_szName, sizeof(m_szName), _szName);
-	m_iMaxHP = _iMaxHP;
-	m_iHP = _iHP;
-	m_iAttack = _iAttack;
+	strcpy_s(m_szName, sizeof(m_szName), szName);
+	m_iMaxHP = iMaxHP;
+	m_iHP = iHP;
+	m_iAttack = iAttack;
 }
 
 CCharacter::~CCharacter()
 {
-	Release();
 }
 
 void CCharacter::Initialize()
@@ -54,29 +53,24 @@ int CCharacter::GetAttack()
 	return m_iAttack;
 }
 
-void CCharacter::SetName(const char _szName[])
+void CCharacter::SetName(const char szName[])
 {
-	strcpy_s(m_szName, sizeof(m_szName), _szName);
+	strcpy_s(m_szName, sizeof(m_szName), szName);
 }
 
-void CCharacter::SetMaxHP(int _iMaxHP)
+void CCharacter::SetMaxHP(int iMaxHP)
 {
-	m_iMaxHP = _iMaxHP;
+	m_iMaxHP = iMaxHP;
 }
 
-void CCharacter::SetHP(int _iHP)
+void CCharacter::SetHP(int iHP)
 {
-	m_iHP = _iHP;
+	m_iHP = iHP;
 }
 
-void CCharacter::SetAttack(int _iAttack)
+void CCharacter::SetAttack(int iAttack)
 {
-	m_iAttack = _iAttack;
-}
-
-CInventory* CCharacter::GetInventory()
-{
-	return nullptr;
+	m_iAttack = iAttack;
 }
 
 void CCharacter::Attack(CCharacter* pCounterPart)
@@ -84,9 +78,9 @@ void CCharacter::Attack(CCharacter* pCounterPart)
 	pCounterPart->OnDamaged(m_iAttack);
 }
 
-void CCharacter::OnDamaged(int _iAttack)
+void CCharacter::OnDamaged(int iAttack)
 {
-	m_iHP -= _iAttack;
+	m_iHP -= iAttack;
 	m_iHP = (m_iHP >= 0) ? m_iHP : 0;
 }
 
@@ -95,15 +89,7 @@ bool CCharacter::IsDead()
 	return m_iHP == 0;
 }
 
-void CCharacter::Sell(CItem* Item)
-{
-}
-
-void CCharacter::Buy(CStore* Store, CItem* Item)
-{
-}
-
-void CCharacter::PrintInfo()
+void CCharacter::PrintCharacterInfo()
 {
 	cout << "================================" << endl;
 	cout << "이름 : " << m_szName << endl;

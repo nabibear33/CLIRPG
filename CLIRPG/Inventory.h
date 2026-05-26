@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "pch.h"
 
@@ -16,21 +16,27 @@ public:
 
 	int GetItemCount();
 	void UpdateGold(int Gold);
-	void SetCurrentTab(eItemType ItemType);
+	void SetCurrentTab(eItemType _eItemType);
 	int GetCurrentGold();
-	vector<CItem*>& GetItems();
+	CItem** GetItems();
 
 	void AddItem(CItem* pItem);
+	CItem* PopItem(CItem* pItem);
+	CItem* PopItem(int iIndex);
 	void RemoveItem(CItem* pItem);
+	void RemoveItem(int iIndex);
 
 	CItem* GetItemFromSelection(int iSelection);
 
-	void PrintItems(eStoreTab StoreTab);
+	bool IsValidIndex(int iSelection);
+
+	void PrintItems(eStoreState _eStoreState);
 	
 private:
-	vector<CItem*> m_Items;
+	CItem* m_pItems[MAX_INVENTORY_SIZE];
+	int m_iNumItems;
 
-	eItemType m_CurrentTab;
+	eItemType m_eCurrentTab;
 
 	int m_iGold;
 };

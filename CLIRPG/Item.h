@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "pch.h"
 
@@ -6,6 +6,7 @@ class CItem
 {
 public:
 	CItem();
+	CItem(eItemCode _eItemCode);
 	CItem(
 		eItemCode _eItemCode,
 		eItemType _eItemType,
@@ -14,6 +15,7 @@ public:
 		int iBuyPrice,
 		int iSellPrice
 	);
+	CItem(const CItem& other);
 	virtual ~CItem();
 
 	virtual void Initialize();
@@ -24,7 +26,7 @@ public:
 	int GetBuyPrice();
 	int GetSellPrice();
 
-	virtual void PrintItemInfo(eStoreTab StoreTab);
+	virtual void PrintItemInfo(eStoreState _eStoreState);
 
 private:
 	eItemCode m_eItemCode;

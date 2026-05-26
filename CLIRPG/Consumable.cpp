@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Consumable.h"
 
 CConsumable::CConsumable() : CItem()
@@ -32,8 +32,8 @@ void CConsumable::Consume()
 {
 }
 
-void CConsumable::PrintItemInfo(eStoreTab StoreTab)
+void CConsumable::PrintItemInfo(eStoreState _eStoreState)
 {
-	CItem::PrintItemInfo(StoreTab);
-	cout << "HP È¸º¹·® : " << m_iHP << endl;
+	CItem::PrintItemInfo(_eStoreState);
+	cout << "HP íšŒë³µëŸ‰ : " << m_iHP << endl;
 }

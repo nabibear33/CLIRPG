@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "pch.h"
 #include "Memory.h"
@@ -20,7 +20,7 @@ public:
 	virtual void Release();
 
 	// Getter, Setter
-	void SetGameStatus(eGameStatus Status);
+	void SetGameStatus(eGameStatus eStatus);
 
 	// eGameStatus : INTRO
 	// not yet

@@ -1,11 +1,23 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Item.h"
-
+#include "Database.h"
 
 CItem::CItem()
 {
 	strcpy_s(m_szName, sizeof(m_szName), "");
 	strcpy_s(m_szDetail, sizeof(m_szDetail), "");
+}
+
+CItem::CItem(eItemCode _eItemCode)
+{
+	for (int i = 0; i < MAX_DB_ARRAY_SIZE; ++i)
+	{
+		if (DB::ItemDB[i]._eItemCode == _eItemCode)
+		{
+			*this = DB::ItemDB[i].Item;
+			return;
+		}
+	}
 }
 
 CItem::CItem(eItemCode _eItemCode, eItemType _eItemType, const char szName[], const char szDetail[], int iBuyPrice, int iSellPrice)
@@ -20,6 +32,19 @@ CItem::CItem(eItemCode _eItemCode, eItemType _eItemType, const char szName[], co
 	m_bFinite = true;
 	m_bCountable = (m_eItemType != eItemType::EQUIPMENT);
 	m_iCount = 1;
+}
+
+CItem::CItem(const CItem& other)
+{
+	m_eItemCode = other.m_eItemCode;
+	m_eItemType = other.m_eItemType;
+	strcpy_s(m_szName, sizeof(m_szName), other.m_szName);
+	strcpy_s(m_szDetail, sizeof(m_szDetail), other.m_szDetail);
+	m_iBuyPrice = other.m_iBuyPrice;
+	m_iSellPrice = other.m_iSellPrice;
+	m_bFinite = other.m_bFinite;
+	m_bCountable = other.m_bCountable;
+	m_iCount = other.m_iCount;
 }
 
 CItem::~CItem()
@@ -53,18 +78,18 @@ int CItem::GetSellPrice()
 	return m_iSellPrice;
 }
 
-void CItem::PrintItemInfo(eStoreTab StoreTab)
+void CItem::PrintItemInfo(eStoreState _eStoreState)
 {
-	cout << "[" << Enum::EnumToString(m_eItemType) << "] " << m_szName << endl;
+	cout << "[" << CEnum::EnumToString(m_eItemType) << "] " << m_szName << endl;
 	cout << m_szDetail << endl;
-	switch (StoreTab)
+	switch (_eStoreState)
 	{
-	case eStoreTab::NONE:
+	case eStoreState::NONE:
 		break;
-	case eStoreTab::BUY:
+	case eStoreState::ON_BUYING:
 		cout << "구매 가격 : " << m_iBuyPrice << "골드" << endl;
 		break;
-	case eStoreTab::SELL:
+	case eStoreState::ON_SELLING:
 		cout << "판매 가격 : " << m_iSellPrice << "골드" << endl;
 		break;
 	}
