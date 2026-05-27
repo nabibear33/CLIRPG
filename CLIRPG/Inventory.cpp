@@ -28,6 +28,18 @@ void CInventory::Initialize()
 
 void CInventory::Update()
 {
+	while (true)
+	{
+		system("cls");
+		PrintItems(eStoreState::NONE);
+
+		cout << "0. 뒤로 가기" << endl;
+		cout << "메뉴를 선택하세요 : ";
+
+		int iSelection;
+		cin >> iSelection;
+		if (iSelection == 0) return;
+	}
 }
 
 void CInventory::Release()
@@ -53,6 +65,7 @@ CItem* CInventory::PopItem(CItem* pItem)
 		{
 			CItem* pTempItem = m_pItems[i];
 			m_pItems[i] = nullptr;
+			swap(m_pItems[i], m_pItems[m_iNumItems - 1]);
 			--m_iNumItems;
 			return pTempItem;
 		}
@@ -73,6 +86,8 @@ CItem* CInventory::PopItem(int iIndex)
 	{
 		CItem* pTempItem = m_pItems[iIndex];
 		m_pItems[iIndex] = nullptr;
+		swap(m_pItems[iIndex], m_pItems[m_iNumItems - 1]);
+		--m_iNumItems;
 		return pTempItem;
 	}
 }
@@ -84,11 +99,11 @@ void CInventory::RemoveItem(CItem* pItem)
 		if (pItem == m_pItems[i])
 		{
 			SafeDeleteSingle(m_pItems[i]);
+			swap(m_pItems[i], m_pItems[m_iNumItems - 1]);
 			--m_iNumItems;
 			return;
 		}
 	}
-
 	cout << "아이템을 찾지 못하여 인벤토리에서 제거하지 못했습니다." << endl;
 }
 
@@ -102,6 +117,8 @@ void CInventory::RemoveItem(int iIndex)
 	else
 	{
 		SafeDeleteSingle(m_pItems[iIndex]);
+		swap(m_pItems[iIndex], m_pItems[m_iNumItems - 1]);
+		--m_iNumItems;
 		return;
 	}
 }
@@ -143,7 +160,7 @@ void CInventory::PrintItems(eStoreState _eStoreState)
 	cout << "========== 아이템 목록 ===========" << endl;
 	for (int i = 0; i < m_iNumItems; ++i)
 	{
-		cout << i << "." << endl;
+		cout << i + 1 << "." << endl;
 		m_pItems[i]->PrintItemInfo(_eStoreState);
 		cout << endl;
 	}

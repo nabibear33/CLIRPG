@@ -11,6 +11,7 @@ class CCharacter
 public:
 	CCharacter();
 	CCharacter(const char szName[], int iMaxHP, int iHP, int iAttack);
+	CCharacter(const CCharacter& other);
 	virtual ~CCharacter();
 
 	virtual void Initialize();
@@ -26,6 +27,11 @@ public:
 	void SetMaxHP(int _iMaxHP);
 	void SetHP(int _iHP);
 	void SetAttack(int _iAttack);
+
+	virtual CCharacter* Clone() = 0;
+
+	static CCharacter* CreatePlayer(ePlayerClassCode _ePlayerClassCode);
+	static CCharacter* CreateMonster(eMonsterCode _eMonsterCode);
 
 	//virtual CInventory* GetInventory();
 

@@ -25,6 +25,8 @@ public:
 	virtual void Update();
 	virtual void Release();
 
+	virtual CItem* Clone() override;
+
 	void Equip(CPlayer* pPlayer);
 
 	virtual void PrintItemInfo(eStoreState _eStoreState) override;

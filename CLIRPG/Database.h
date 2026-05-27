@@ -7,24 +7,28 @@
 #include "Misc.h"
 #include "Monster.h"
 #include "Player.h"
+#include "Memory.h"
 
 
 struct tItemDB
 {
+	~tItemDB() { SafeDeleteSingle(Item); }
 	eItemCode _eItemCode;
-	CItem Item;
+	CItem* Item;
 };
 
 struct tMonsterDB
 {
+	~tMonsterDB() { SafeDeleteSingle(Monster); }
 	eMonsterCode _eMonsterCode;
-	CMonster Monster;
+	CMonster* Monster;
 };
 
 struct tPlayerClassDB
 {
+	~tPlayerClassDB() { SafeDeleteSingle(Player); }
 	ePlayerClassCode _ePlayerClassCode;
-	CPlayer Player;
+	CPlayer* Player;
 };
 
 struct tDropItemDB

@@ -28,6 +28,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_pInventory = new CInventory;
+	m_pInventory->UpdateGold(100);
 }
 
 void CPlayer::Update()
@@ -36,6 +37,11 @@ void CPlayer::Update()
 
 void CPlayer::Release()
 {
+}
+
+CCharacter* CPlayer::Clone()
+{
+	return new CPlayer(*this);
 }
 
 void CPlayer::InitializeClass(int iSelection)

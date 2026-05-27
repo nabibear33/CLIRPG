@@ -16,6 +16,11 @@ CConsumable::~CConsumable()
 {
 }
 
+CItem* CConsumable::Clone()
+{
+	return new CConsumable(*this);
+}
+
 void CConsumable::Initialize()
 {
 }

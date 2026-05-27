@@ -16,6 +16,8 @@ public:
 		int iHP);
 	virtual ~CConsumable();
 
+	virtual CItem* Clone() override;
+
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Release();

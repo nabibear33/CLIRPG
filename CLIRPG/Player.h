@@ -17,6 +17,8 @@ public:
 	virtual void Update();
 	virtual void Release();
 
+	virtual CCharacter* Clone() override;
+
 	virtual void InitializeClass(int iSelection);
 
 	void Revive();

@@ -33,6 +33,11 @@ void CEquipment::Release()
 {
 }
 
+CItem* CEquipment::Clone()
+{
+	return new CEquipment(*this);
+}
+
 void CEquipment::Equip(CPlayer* pPlayer)
 {
 }

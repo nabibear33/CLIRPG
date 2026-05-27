@@ -14,6 +14,8 @@ public:
 	);
 	virtual ~CMisc();
 
+	virtual CItem* Clone();
+
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Release();

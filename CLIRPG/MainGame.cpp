@@ -61,6 +61,9 @@ void CMainGame::Update()
 		case eGameStatus::ON_STORE:
 			OnStore();
 			break;
+		case eGameStatus::ON_INVENTORY:
+			OnInventory();
+			break;
 		default:
 			cout << "비정상 종료" << endl;
 			return;
@@ -130,13 +133,16 @@ void CMainGame::ChooseClass()
 		int iClassSelection(0);
 		cin >> iClassSelection;
 
+		ePlayerClassCode _ePlayerClassCode;
 		switch (iClassSelection)
 		{
 		case 1:
 		case 2:
 		case 3:
-			m_pPlayer = new CPlayer;
-			dynamic_cast<CPlayer*>(m_pPlayer)->InitializeClass(iClassSelection);
+			// m_pPlayer = new CPlayer;
+			// dynamic_cast<CPlayer*>(m_pPlayer)->InitializeClass(iClassSelection);
+			_ePlayerClassCode = static_cast<ePlayerClassCode>(iClassSelection);
+			m_pPlayer = CCharacter::CreatePlayer(_ePlayerClassCode);
 			m_pPlayer->Initialize();
 			SetGameStatus(eGameStatus::ON_LOBBY);
 			return;
@@ -154,7 +160,7 @@ void CMainGame::OnLobby()
 	{
 		system("cls");
 		m_pPlayer->PrintCharacterInfo();
-		cout << "1. 사냥터  2. 상점  3. 게임 종료" << endl;
+		cout << "1. 사냥터  2. 상점  3. 인벤토리  4. 게임 종료" << endl;
 		cout << "선택지를 입력하세요 : ";
 
 		int iMainMenuSelection(0);
@@ -169,6 +175,9 @@ void CMainGame::OnLobby()
 			SetGameStatus(eGameStatus::ON_STORE);
 			return;
 		case 3:
+			SetGameStatus(eGameStatus::ON_INVENTORY);
+			return;
+		case 4:
 			SetGameStatus(eGameStatus::QUIT);
 			return;
 		default:
@@ -188,21 +197,18 @@ void CMainGame::SelectLevel()
 		cout << "1. 초급  2. 중급  3. 고급  4. 돌아가기" << endl;
 		cout << "선택지를 입력하세요 : ";
 
-		int iFieldSelection(0);
-		cin >> iFieldSelection;
+		int iLevelSelection(0);
+		cin >> iLevelSelection;
 
-		switch (iFieldSelection)
+		eMonsterCode _eMonsterCode;
+		switch (iLevelSelection)
 		{
 		case 1:
-			m_pMonster = new CMonster(eMonsterCode::EASY);
-			SetGameStatus(eGameStatus::ON_COMBAT);
-			return;
 		case 2:
-			m_pMonster = new CMonster(eMonsterCode::NORMAL);
-			SetGameStatus(eGameStatus::ON_COMBAT);
-			return;
 		case 3:
-			m_pMonster = new CMonster(eMonsterCode::HARD);
+			_eMonsterCode = static_cast<eMonsterCode>(iLevelSelection);
+			m_pMonster = CCharacter::CreateMonster(_eMonsterCode);
+			m_pMonster->Initialize();
 			SetGameStatus(eGameStatus::ON_COMBAT);
 			return;
 		case 4:
@@ -296,5 +302,11 @@ void CMainGame::OnStore()
 {
 	m_pStore->SetPlayer(static_cast<CPlayer*>(m_pPlayer));
 	m_pStore->Update();
-	m_eGameStatus = eGameStatus::ON_LOBBY;
+	SetGameStatus(eGameStatus::ON_LOBBY);
+}
+
+void CMainGame::OnInventory()
+{
+	static_cast<CPlayer*>(m_pPlayer)->GetInventory()->Update();
+	SetGameStatus(eGameStatus::ON_LOBBY);
 }

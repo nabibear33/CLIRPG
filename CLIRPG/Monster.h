@@ -23,6 +23,8 @@ public:
 	virtual void Update();
 	virtual void Release();
 
+	virtual CCharacter* Clone() override;
+
 	void OnDead(CPlayer* pPlayer);
 
 	void DropItem(CPlayer* pPlayer);

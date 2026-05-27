@@ -22,11 +22,17 @@ public:
 	virtual void Update();
 	virtual void Release();
 
+	static CItem* Create(eItemCode _eItemCode);
+	virtual CItem* Clone() = 0;
+
 	eItemType GetItemType();
 	int GetBuyPrice();
 	int GetSellPrice();
+	const char* GetName();
 
 	virtual void PrintItemInfo(eStoreState _eStoreState);
+
+
 
 private:
 	eItemCode m_eItemCode;

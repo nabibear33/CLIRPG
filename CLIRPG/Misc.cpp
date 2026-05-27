@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Misc.h"
+#include "Database.h"
 
 CMisc::CMisc()
 {
@@ -12,6 +13,11 @@ CMisc::CMisc(eItemCode _eItemCode, const char szName[], const char szDetail[], i
 
 CMisc::~CMisc()
 {
+}
+
+CItem* CMisc::Clone()
+{
+	return new CMisc(*this);
 }
 
 void CMisc::Initialize()

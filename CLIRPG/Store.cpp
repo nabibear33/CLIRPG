@@ -20,6 +20,12 @@ CStore::~CStore()
 void CStore::Initialize()
 {
 	m_pInventory = new CInventory;
+	m_eCurrentState = eStoreState::ON_MENU;
+
+	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_ARMOR_BASIC));
+	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_HEADGEAR_BASIC));
+	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_WEAPON_BASIC));
+	m_pInventory->AddItem(CItem::Create(eItemCode::CONSUME_PORTION_HP_SMALL));
 }
 
 void CStore::Update()
@@ -28,7 +34,7 @@ void CStore::Update()
 	{
 		switch (m_eCurrentState)
 		{
-		case eStoreState::NONE:
+		case eStoreState::ON_MENU:
 			OnSelectMenu();
 			continue;
 		case eStoreState::ON_BUYING:
@@ -39,6 +45,8 @@ void CStore::Update()
 			continue;
 		}
 	}
+
+	SetCurrentState(eStoreState::ON_MENU);
 }
 
 
@@ -93,13 +101,11 @@ void CStore::OnBuyTab()
 		if (iBuyItemSelection == 0)
 		{
 			SetCurrentState(eStoreState::ON_MENU);
-			continue;
+			return;
 		}
 		else if (CItem* pItem = GetInventory()->GetItemFromSelection(iBuyItemSelection))
 		{
 			OnPlayerBuy(pItem);
-			cout << "아이템 구매 완료" << endl;
-			system("pause");
 			continue;
 		}
 		else
@@ -131,8 +137,6 @@ void CStore::OnSellTab()
 		else if (CItem* pItem = dynamic_cast<CPlayer*>(m_pPlayer)->GetInventory()->GetItemFromSelection(iSellItemSelection))
 		{
 			OnPlayerSell(pItem);
-			cout << "아이템 판매 완료" << endl;
-			system("pause");
 			return;
 		}
 		else
@@ -173,10 +177,9 @@ void CStore::PrintHeader()
 
 void CStore::OnPlayerBuy(CItem* pItem)
 {
-	if (pItem->GetBuyPrice() <= m_pInventory->GetCurrentGold())
+	if (pItem->GetBuyPrice() <= m_pPlayer->GetInventory()->GetCurrentGold())
 	{
-		m_pInventory->PopItem(pItem);
-		m_pPlayer->GetInventory()->AddItem(pItem);
+		m_pPlayer->GetInventory()->AddItem(pItem->Clone());
 		m_pPlayer->GetInventory()->UpdateGold(-pItem->GetBuyPrice());
 		
 		cout << "아이템 구매 완료" << endl;
@@ -191,8 +194,8 @@ void CStore::OnPlayerBuy(CItem* pItem)
 
 void CStore::OnPlayerSell(CItem* pItem)
 {
-	m_pPlayer->GetInventory()->PopItem(pItem);
 	m_pPlayer->GetInventory()->UpdateGold(pItem->GetSellPrice());
+	m_pPlayer->GetInventory()->RemoveItem(pItem);
 
 	cout << "아이템 판매 완료" << endl;
 	system("pause");

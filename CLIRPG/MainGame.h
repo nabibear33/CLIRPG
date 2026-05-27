@@ -46,6 +46,9 @@ public:
 	// eGameStatus : ON_STORE
 	void OnStore();
 
+	// eGameStatus : ON_INVENTORY
+	void OnInventory();
+
 private:
 	// Global State
 	eGameStatus m_eGameStatus;

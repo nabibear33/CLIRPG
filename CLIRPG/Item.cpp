@@ -10,14 +10,6 @@ CItem::CItem()
 
 CItem::CItem(eItemCode _eItemCode)
 {
-	for (int i = 0; i < MAX_DB_ARRAY_SIZE; ++i)
-	{
-		if (DB::ItemDB[i]._eItemCode == _eItemCode)
-		{
-			*this = DB::ItemDB[i].Item;
-			return;
-		}
-	}
 }
 
 CItem::CItem(eItemCode _eItemCode, eItemType _eItemType, const char szName[], const char szDetail[], int iBuyPrice, int iSellPrice)
@@ -63,6 +55,18 @@ void CItem::Release()
 {
 }
 
+CItem* CItem::Create(eItemCode _eItemCode)
+{
+	for (int i = 0; i < MAX_DB_ARRAY_SIZE; ++i)
+	{
+		if (DB::ItemDB[i]._eItemCode == _eItemCode)
+		{
+			return DB::ItemDB[i].Item->Clone();
+		}
+	}
+	return nullptr;
+}
+
 eItemType CItem::GetItemType()
 {
 	return m_eItemType;
@@ -76,6 +80,11 @@ int CItem::GetBuyPrice()
 int CItem::GetSellPrice()
 {
 	return m_iSellPrice;
+}
+
+const char* CItem::GetName()
+{
+	return m_szName;
 }
 
 void CItem::PrintItemInfo(eStoreState _eStoreState)

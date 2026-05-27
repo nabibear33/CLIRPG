@@ -10,6 +10,7 @@ enum class eGameStatus
 	SELECTING_LEVEL,
 	ON_COMBAT,
 	ON_STORE,
+	ON_INVENTORY,
 	QUIT,
 };
 
@@ -71,7 +72,7 @@ enum class ePlayerClassCode
 
 enum class eMonsterCode
 {
-	NONE,
+	NONE = 0,
 	EASY,
 	NORMAL,
 	HARD,

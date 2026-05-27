@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Character.h"
+#include "Database.h"
 
 CCharacter::CCharacter()
 {
@@ -15,6 +16,14 @@ CCharacter::CCharacter(const char szName[], int iMaxHP, int iHP, int iAttack)
 	m_iMaxHP = iMaxHP;
 	m_iHP = iHP;
 	m_iAttack = iAttack;
+}
+
+CCharacter::CCharacter(const CCharacter& other)
+{
+	strcpy_s(m_szName, sizeof(m_szName), other.m_szName);
+	m_iMaxHP = other.m_iMaxHP;
+	m_iHP = other.m_iHP;
+	m_iAttack = other.m_iAttack;
 }
 
 CCharacter::~CCharacter()
@@ -71,6 +80,30 @@ void CCharacter::SetHP(int iHP)
 void CCharacter::SetAttack(int iAttack)
 {
 	m_iAttack = iAttack;
+}
+
+CCharacter* CCharacter::CreatePlayer(ePlayerClassCode _ePlayerClassCode)
+{
+	for (int i = 0; i < MAX_DB_ARRAY_SIZE; ++i)
+	{
+		if (DB::PlayerClassDB[i]._ePlayerClassCode == _ePlayerClassCode)
+		{
+			return DB::PlayerClassDB[i].Player->Clone();
+		}
+	}
+	return nullptr;
+}
+
+CCharacter* CCharacter::CreateMonster(eMonsterCode _eMonsterCode)
+{
+	for (int i = 0; i < MAX_DB_ARRAY_SIZE; ++i)
+	{
+		if (DB::MonsterDB[i]._eMonsterCode == _eMonsterCode)
+		{
+			return DB::MonsterDB[i].Monster->Clone();
+		}
+	}
+	return nullptr;
 }
 
 void CCharacter::Attack(CCharacter* pCounterPart)
