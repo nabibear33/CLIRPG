@@ -93,3 +93,15 @@ tDropItemDB DB::DropItemDB[MAX_DB_ARRAY_SIZE] = {
 	{eMonsterCode::HARD, eItemCode::MISC_DROP_HARD, 0.5},
 };
 
+tLevelDB DB::LevelDB[MAX_DB_ARRAY_SIZE] = {
+	{1, 3},
+	{2, 6},
+	{3, 9},
+	{4, 12},
+	{5, 15},
+	{6, 18},
+	{7, 21},
+	{8, 24},
+	{9, 27},
+	{10, 30},
+};

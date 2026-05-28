@@ -25,12 +25,6 @@
     <Filter Include="Source Files\Item">
       <UniqueIdentifier>{bf621cae-a9a2-43cd-94dc-7f174d6f2986}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{292053fa-3739-42dd-ac25-e8463e231be4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Core">
-      <UniqueIdentifier>{9938de80-1e20-4086-a037-1fba61fc4da1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Item">
       <UniqueIdentifier>{da5c4279-38ba-4111-9366-3728081371f9}</UniqueIdentifier>
     </Filter>
@@ -46,6 +40,24 @@
     <Filter Include="Source Files\Static">
       <UniqueIdentifier>{39fe5dc3-68aa-4aa2-8abe-162409654013}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Manager">
+      <UniqueIdentifier>{9938de80-1e20-4086-a037-1fba61fc4da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager">
+      <UniqueIdentifier>{292053fa-3739-42dd-ac25-e8463e231be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{8ea3feed-d87a-4a12-a702-cee8f51a1d26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{94a3be1f-63e1-47ed-91eb-3049a6f1a718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render">
+      <UniqueIdentifier>{95cd178f-92b4-4001-8d8d-0a660c3e54ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render">
+      <UniqueIdentifier>{19d56fb0-a554-425a-a0b2-f59585a37feb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,41 +69,44 @@
     <ClCompile Include="Character.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
+    <ClCompile Include="Consumable.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Equipment.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Equipment.cpp">
-      <Filter>Source Files\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Consumable.cpp">
-      <Filter>Source Files\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Misc.cpp">
-      <Filter>Source Files\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Source Files\Logic</Filter>
+    <ClCompile Include="SaveGame.cpp">
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Store.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="Memory.h">
-      <Filter>Header Files\Static</Filter>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SaveGame.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Database.cpp">
-      <Filter>Source Files\Static</Filter>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,47 +116,56 @@
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
+    <ClInclude Include="Consumable.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Equipment.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="MainGame.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Equipment.h">
-      <Filter>Header Files\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Consumable.h">
-      <Filter>Header Files\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Misc.h">
-      <Filter>Header Files\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Store.h">
-      <Filter>Header Files\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Header Files\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="Enum.h">
-      <Filter>Header Files\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Database.h">
-      <Filter>Header Files\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Types.h">
-      <Filter>Header Files\Static</Filter>
-    </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
     <ClInclude Include="SaveGame.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Store.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

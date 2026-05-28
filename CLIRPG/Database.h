@@ -38,6 +38,12 @@ struct tDropItemDB
 	double dDropChance;
 };
 
+struct tLevelDB
+{
+	int iLevel;
+	int iRequiredExp;
+};
+
 class DB
 {
 public:
@@ -45,5 +51,6 @@ public:
 	static tMonsterDB MonsterDB[MAX_DB_ARRAY_SIZE];
 	static tPlayerClassDB PlayerClassDB[MAX_DB_ARRAY_SIZE];
 	static tDropItemDB DropItemDB[MAX_DB_ARRAY_SIZE];
+	static tLevelDB LevelDB[MAX_DB_ARRAY_SIZE];
 };
 
