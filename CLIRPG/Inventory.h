@@ -18,7 +18,7 @@ public:
 	void UpdateGold(int Gold);
 	void SetCurrentTab(eItemType _eItemType);
 	int GetCurrentGold();
-	CItem** GetItems();
+	vector<CItem*>& GetItems();
 
 	void AddItem(CItem* pItem);
 	CItem* PopItem(CItem* pItem);
@@ -33,8 +33,7 @@ public:
 	void PrintItems(eStoreState _eStoreState);
 	
 private:
-	CItem* m_pItems[MAX_INVENTORY_SIZE];
-	int m_iNumItems;
+	vector<CItem*> m_vecItem;
 
 	eItemType m_eCurrentTab;
 

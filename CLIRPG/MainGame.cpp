@@ -73,10 +73,10 @@ void CMainGame::Update()
 
 void CMainGame::Release()
 {
-	SafeDeleteSingle(m_pPlayer);
-	SafeDeleteSingle(m_pMonster);
-	SafeDeleteSingle(m_pStore);
-	SafeDeleteSingle(m_pSaveManager);
+	Safe_Delete(m_pPlayer);
+	Safe_Delete(m_pMonster);
+	Safe_Delete(m_pStore);
+	Safe_Delete(m_pSaveManager);
 }
 
 void CMainGame::SetGameStatus(eGameStatus Status)
@@ -265,7 +265,7 @@ void CMainGame::CombatSingleTurn()
 
 		cout << "승리!" << endl;
 		dynamic_cast<CMonster*>(m_pMonster)->OnDead(static_cast<CPlayer*>(m_pPlayer));
-		SafeDeleteSingle(m_pMonster);
+		Safe_Delete(m_pMonster);
 
 		system("pause");
 
@@ -282,7 +282,7 @@ void CMainGame::CombatSingleTurn()
 		m_pMonster->PrintCharacterInfo();
 
 		cout << "패배" << endl;
-		SafeDeleteSingle(m_pMonster);
+		Safe_Delete(m_pMonster);
 
 		system("pause");
 
@@ -294,7 +294,7 @@ void CMainGame::CombatSingleTurn()
 
 void CMainGame::RunAway()
 {
-	SafeDeleteSingle(m_pMonster);
+	Safe_Delete(m_pMonster);
 	SetGameStatus(eGameStatus::SELECTING_LEVEL);
 }
 

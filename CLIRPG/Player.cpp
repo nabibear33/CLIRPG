@@ -22,7 +22,7 @@ CPlayer::CPlayer(const char szName[], int iMaxHP, int iHP, int iAttack)
 
 CPlayer::~CPlayer()
 {
-	SafeDeleteSingle(m_pInventory);
+	Safe_Delete(m_pInventory);
 }
 
 void CPlayer::Initialize()

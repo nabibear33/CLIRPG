@@ -12,21 +12,21 @@
 
 struct tItemDB
 {
-	~tItemDB() { SafeDeleteSingle(Item); }
+	~tItemDB() { Safe_Delete(Item); }
 	eItemCode _eItemCode;
 	CItem* Item;
 };
 
 struct tMonsterDB
 {
-	~tMonsterDB() { SafeDeleteSingle(Monster); }
+	~tMonsterDB() { Safe_Delete(Monster); }
 	eMonsterCode _eMonsterCode;
 	CMonster* Monster;
 };
 
 struct tPlayerClassDB
 {
-	~tPlayerClassDB() { SafeDeleteSingle(Player); }
+	~tPlayerClassDB() { Safe_Delete(Player); }
 	ePlayerClassCode _ePlayerClassCode;
 	CPlayer* Player;
 };

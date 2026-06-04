@@ -35,7 +35,7 @@ CMonster::CMonster(const CMonster& other) : CCharacter(other)
 
 CMonster::~CMonster()
 {
-	SafeDeleteSingle(m_pInventory);
+	Safe_Delete(m_pInventory);
 }
 
 void CMonster::Initialize()

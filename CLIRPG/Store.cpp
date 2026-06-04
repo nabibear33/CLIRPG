@@ -14,7 +14,7 @@ CStore::CStore()
 
 CStore::~CStore()
 {
-	SafeDeleteSingle(m_pInventory);
+	Safe_Delete(m_pInventory);
 }
 
 void CStore::Initialize()

@@ -3,10 +3,13 @@
 #include "pch.h"
 
 template<typename T>
-void SafeDeleteSingle(T& p)
+void Safe_Delete(T& p)
 {
-	delete p;
-	p = nullptr;
+	if (p)
+	{
+		delete p;
+		p = nullptr;
+	}
 }
 
 //template<typename T>

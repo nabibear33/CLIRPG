@@ -7,10 +7,9 @@ CInventory::CInventory()
 {
 	m_eCurrentTab = eItemType::NONE;
 	m_iGold = 0;
-	m_iNumItems = 0;
 	for (int i = 0; i < MAX_INVENTORY_SIZE; ++i)
 	{
-		m_pItems[i] = nullptr;
+		m_vecItem[i] = nullptr;
 	}
 }
 
@@ -18,7 +17,7 @@ CInventory::~CInventory()
 {
 	for (int i = 0; i < MAX_INVENTORY_SIZE; ++i)
 	{
-		SafeDeleteSingle(m_pItems[i]);
+		Safe_Delete(m_vecItem[i]);
 	}
 }
 
@@ -48,25 +47,22 @@ void CInventory::Release()
 
 int CInventory::GetItemCount()
 {
-	return m_iNumItems;
+	return static_cast<int>(m_vecItem.size());
 }
 
 void CInventory::AddItem(CItem* pItem)
 {
-	m_pItems[m_iNumItems] = pItem;
-	++m_iNumItems;
+	m_vecItem.push_back(pItem);
 }
 
 CItem* CInventory::PopItem(CItem* pItem)
 {
-	for (int i = 0; i < m_iNumItems; ++i)
+	for (vector<CItem*>::iterator iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
 	{
-		if (pItem == m_pItems[i])
+		if (pItem == *iter)
 		{
-			CItem* pTempItem = m_pItems[i];
-			m_pItems[i] = nullptr;
-			swap(m_pItems[i], m_pItems[m_iNumItems - 1]);
-			--m_iNumItems;
+			CItem* pTempItem = *iter;
+			m_vecItem.erase(iter);
 			return pTempItem;
 		}
 	}
@@ -84,26 +80,24 @@ CItem* CInventory::PopItem(int iIndex)
 	}
 	else
 	{
-		CItem* pTempItem = m_pItems[iIndex];
-		m_pItems[iIndex] = nullptr;
-		swap(m_pItems[iIndex], m_pItems[m_iNumItems - 1]);
-		--m_iNumItems;
+		CItem* pTempItem = m_vecItem[iIndex];
+		m_vecItem.erase(m_vecItem.begin() + iIndex);
 		return pTempItem;
 	}
 }
 
 void CInventory::RemoveItem(CItem* pItem)
 {
-	for (int i = 0; i < m_iNumItems; ++i)
+	for (vector<CItem*>::iterator iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
 	{
-		if (pItem == m_pItems[i])
+		if (pItem == *iter)
 		{
-			SafeDeleteSingle(m_pItems[i]);
-			swap(m_pItems[i], m_pItems[m_iNumItems - 1]);
-			--m_iNumItems;
-			return;
+			CItem* pTempItem = *iter;
+			Safe_Delete(*iter);
+			m_vecItem.erase(iter);
 		}
 	}
+
 	cout << "아이템을 찾지 못하여 인벤토리에서 제거하지 못했습니다." << endl;
 }
 
@@ -116,9 +110,8 @@ void CInventory::RemoveItem(int iIndex)
 	}
 	else
 	{
-		SafeDeleteSingle(m_pItems[iIndex]);
-		swap(m_pItems[iIndex], m_pItems[m_iNumItems - 1]);
-		--m_iNumItems;
+		Safe_Delete(m_vecItem[iIndex]);
+		m_vecItem.erase(m_vecItem.begin() + iIndex);
 		return;
 	}
 }
@@ -138,30 +131,30 @@ int CInventory::GetCurrentGold()
 	return m_iGold;
 }
 
-CItem** CInventory::GetItems()
+vector<CItem*>& CInventory::GetItems()
 {
-	return m_pItems;
+	return m_vecItem;
 }
 
 CItem* CInventory::GetItemFromSelection(int iSelection)
 {
 	int iIndex = iSelection - 1;
 	if (!IsValidIndex(iIndex)) return nullptr;
-	return m_pItems[iIndex];
+	return m_vecItem[iIndex];
 }
 
 bool CInventory::IsValidIndex(int iIndex)
 {
-	return (iIndex < m_iNumItems) && (iIndex >= 0);
+	return (iIndex < static_cast<int>(m_vecItem.size())) && (iIndex >= 0);
 }
 
 void CInventory::PrintItems(eStoreState _eStoreState)
 {
 	cout << "========== 아이템 목록 ===========" << endl;
-	for (int i = 0; i < m_iNumItems; ++i)
+	for (vector<CItem*>::iterator iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
 	{
-		cout << i + 1 << "." << endl;
-		m_pItems[i]->PrintItemInfo(_eStoreState);
+		cout << iter - m_vecItem.begin() + 1 << "." << endl;
+		(*iter)->PrintItemInfo(_eStoreState);
 		cout << endl;
 	}
 	cout << "==================================" << endl;
