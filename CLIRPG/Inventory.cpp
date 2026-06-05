@@ -155,3 +155,16 @@ void CInventory::PrintItems(eStoreState _eStoreState)
 	}
 	cout << "==================================" << endl;
 }
+
+vector<CItem*>& CInventory::GetEquipItems()
+{
+	vector<CItem*> vecEquipItems;
+	for (auto iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
+	{
+		if ((*iter)->GetItemType() == eItemType::EQUIPMENT)
+		{
+			vecEquipItems.push_back((*iter));
+		}
+	}
+	return vecEquipItems;
+}

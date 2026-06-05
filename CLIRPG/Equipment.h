@@ -1,27 +1,32 @@
-#pragma once
+﻿#pragma once
 
 class CEquipItem;
+class CPlayer;
+class CItem;
 
 class CEquipment
 {
 public:
-	CEquipment();
+	CEquipment(CPlayer* pPlayer);
 	~CEquipment();
 
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Release();
 
-	void Equip();
-	void Unequip();
+	virtual void Render();
+
+	void Equip(CItem* pItem);
+	void Unequip(CEquipItem* pEquipItem);
+
+	void UpdatePlayerStat(CEquipItem* pEquipItem, bool bEquip);
 
 private:
-	
-	CEquipItem* pHead;
-	CEquipItem* pArmor;
-	CEquipItem* pGloves;
-	CEquipItem* pShoes;
-	CEquipItem* pWeapon;
-	
+	map<eEquipmentType, CEquipItem*> m_mapEquipSlot;
+
+	CPlayer* m_pPlayer;
+
+	void OnEquipMenu();
+	void OnUnequipMenu();
 };
 

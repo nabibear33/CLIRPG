@@ -11,6 +11,7 @@ enum class eGameStatus
 	ON_COMBAT,
 	ON_STORE,
 	ON_INVENTORY,
+	ON_EQUIPMENT,
 	QUIT,
 };
 
@@ -25,7 +26,7 @@ enum class eItemType
 enum class eEquipmentType
 {
 	NONE = 0,
-	HEADGEAR,
+	HEAD,
 	ARMOR,
 	WEAPON,
 };

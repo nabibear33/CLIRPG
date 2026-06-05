@@ -49,6 +49,9 @@ public:
 	// eGameStatus : ON_INVENTORY
 	void OnInventory();
 
+	// eGameStatus : ON_EQUIPMENT
+	void OnEquipment();
+
 private:
 	// Global State
 	eGameStatus m_eGameStatus;

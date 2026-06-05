@@ -4,6 +4,7 @@
 #include <string.h>
 #include <string>
 #include <vector>
+#include <map>
 
 // STLs
 #include <random>
@@ -11,6 +12,7 @@
 // Utils
 #include "Types.h"
 #include "Enum.h"
+#include "Memory.h"
 
 using namespace std;
 

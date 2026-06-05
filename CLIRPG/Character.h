@@ -45,6 +45,7 @@ public:
 	//virtual void Sell(CItem* Item);
 	//virtual void Buy(CStore* Store, CItem* Item);
 
+
 	void PrintCharacterInfo();
 
 private:

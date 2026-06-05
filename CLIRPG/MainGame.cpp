@@ -6,6 +6,7 @@
 #include "SaveGame.h"
 #include "Store.h"
 #include "Inventory.h"
+#include "Equipment.h"
 
 
 CMainGame::CMainGame()
@@ -63,6 +64,9 @@ void CMainGame::Update()
 			break;
 		case eGameStatus::ON_INVENTORY:
 			OnInventory();
+			break;
+		case eGameStatus::ON_EQUIPMENT:
+			OnEquipment();
 			break;
 		default:
 			cout << "비정상 종료" << endl;
@@ -160,7 +164,7 @@ void CMainGame::OnLobby()
 	{
 		system("cls");
 		m_pPlayer->PrintCharacterInfo();
-		cout << "1. 사냥터  2. 상점  3. 인벤토리  4. 게임 종료" << endl;
+		cout << "1. 사냥터  2. 상점  3. 인벤토리  4. 장비  5. 게임 종료" << endl;
 		cout << "선택지를 입력하세요 : ";
 
 		int iMainMenuSelection(0);
@@ -178,6 +182,9 @@ void CMainGame::OnLobby()
 			SetGameStatus(eGameStatus::ON_INVENTORY);
 			return;
 		case 4:
+			SetGameStatus(eGameStatus::ON_EQUIPMENT);
+			return;
+		case 5:
 			SetGameStatus(eGameStatus::QUIT);
 			return;
 		default:
@@ -308,5 +315,11 @@ void CMainGame::OnStore()
 void CMainGame::OnInventory()
 {
 	static_cast<CPlayer*>(m_pPlayer)->GetInventory()->Update();
+	SetGameStatus(eGameStatus::ON_LOBBY);
+}
+
+void CMainGame::OnEquipment()
+{
+	static_cast<CPlayer*>(m_pPlayer)->GetEquipment()->Update();
 	SetGameStatus(eGameStatus::ON_LOBBY);
 }

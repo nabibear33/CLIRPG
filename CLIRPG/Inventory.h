@@ -31,6 +31,10 @@ public:
 	bool IsValidIndex(int iSelection);
 
 	void PrintItems(eStoreState _eStoreState);
+
+	inline bool IsFull() { return m_vecItem.size() == 5; }
+	
+	vector<CItem*>& GetEquipItems();
 	
 private:
 	vector<CItem*> m_vecItem;

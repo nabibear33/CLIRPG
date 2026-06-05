@@ -27,9 +27,12 @@ public:
 
 	virtual CItem* Clone() override;
 
-	void Equip(CPlayer* pPlayer);
-
 	virtual void PrintItemInfo(eStoreState _eStoreState) override;
+
+	inline int GetHP() { return m_iHP; }
+	inline int GetAttack() { return m_iAttack; }
+
+	inline eEquipmentType GetEquipmentType() { return m_eEquipmentType; }
 
 private:
 	eEquipmentType m_eEquipmentType;

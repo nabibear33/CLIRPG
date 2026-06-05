@@ -38,10 +38,6 @@ CItem* CEquipItem::Clone()
 	return new CEquipItem(*this);
 }
 
-void CEquipItem::Equip(CPlayer* pPlayer)
-{
-}
-
 void CEquipItem::PrintItemInfo(eStoreState _eStoreState)
 {
 	CItem::PrintItemInfo(_eStoreState);

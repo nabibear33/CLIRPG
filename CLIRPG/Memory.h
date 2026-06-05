@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "pch.h"
+// #include "pch.h"
 
 template<typename T>
 void Safe_Delete(T& p)

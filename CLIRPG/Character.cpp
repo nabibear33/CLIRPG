@@ -126,6 +126,6 @@ void CCharacter::PrintCharacterInfo()
 {
 	cout << "================================" << endl;
 	cout << "이름 : " << m_szName << endl;
-	cout << "체력 : " << m_iHP << "\t"
+	cout << "체력 : " << m_iHP << "/" << m_iMaxHP << "\t"
 		 << "공격력 : " << m_iAttack << endl;
 }

@@ -6,6 +6,7 @@
 #include "Store.h"
 #include "Item.h"
 #include "Memory.h"
+#include "EquipItem.h"
 
 CPlayer::CPlayer()
 	: CCharacter()
@@ -32,7 +33,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_pInventory = new CInventory;
-	m_pEquipment = new CEquipment;
+	m_pEquipment = new CEquipment(this);
 	m_pInventory->UpdateGold(100);
 }
 
@@ -89,3 +90,4 @@ CInventory* CPlayer::GetInventory()
 {
 	return m_pInventory;
 }
+

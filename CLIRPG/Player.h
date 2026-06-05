@@ -25,6 +25,8 @@ public:
 	void Revive();
 
 	virtual CInventory* GetInventory();
+	inline CEquipment* GetEquipment() { return m_pEquipment; }
+
 
 private:
 	ePlayerClassCode m_ePlayerClassType;

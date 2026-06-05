@@ -23,7 +23,7 @@ public:
 	{
 		switch (Enum)
 		{
-		case eEquipmentType::HEADGEAR: return "모자";
+		case eEquipmentType::HEAD: return "모자";
 		case eEquipmentType::ARMOR: return "방어구";
 		case eEquipmentType::WEAPON: return "무기";
 		default: return "";

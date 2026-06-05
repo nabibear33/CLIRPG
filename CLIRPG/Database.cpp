@@ -6,7 +6,7 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 	{eItemCode::EQUIP_HEADGEAR_BASIC,
 	new CEquipItem(
 		eItemCode::EQUIP_HEADGEAR_BASIC,
-		eEquipmentType::HEADGEAR,
+		eEquipmentType::HEAD,
 		"하급 방어구 모자",
 		"하급 방어구 모자이다",
 		50,
