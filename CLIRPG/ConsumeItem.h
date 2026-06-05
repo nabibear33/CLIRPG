@@ -3,18 +3,18 @@
 #include "Item.h"
 #include "pch.h"
 
-class CConsumable : public CItem
+class CConsumeItem : public CItem
 {
 public:
-	CConsumable();
-	CConsumable(
+	CConsumeItem();
+	CConsumeItem(
 		eItemCode _eItemCode,
 		const char szName[],
 		const char szDetail[],
 		int iBuyPrice,
 		int iSellPrice,
 		int iHP);
-	virtual ~CConsumable();
+	virtual ~CConsumeItem();
 
 	virtual CItem* Clone() override;
 

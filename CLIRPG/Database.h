@@ -2,9 +2,9 @@
 
 #include "pch.h"
 #include "Item.h"
-#include "Equipment.h"
-#include "Consumable.h"
-#include "Misc.h"
+#include "EquipItem.h"
+#include "ConsumeItem.h"
+#include "MiscItem.h"
 #include "Monster.h"
 #include "Player.h"
 #include "Memory.h"

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Character.h"
 #include "Inventory.h"
+#include "Equipment.h"
 #include "Store.h"
 #include "Item.h"
 #include "Memory.h"
@@ -10,6 +11,7 @@ CPlayer::CPlayer()
 	: CCharacter()
 {
 	m_pInventory = nullptr;
+	m_pEquipment = nullptr;
 	m_ePlayerClassType = ePlayerClassCode::NONE;
 }
 
@@ -17,17 +19,20 @@ CPlayer::CPlayer(const char szName[], int iMaxHP, int iHP, int iAttack)
 	: CCharacter(szName, iMaxHP, iHP, iAttack)
 {
 	m_pInventory = nullptr;
+	m_pEquipment = nullptr;
 	m_ePlayerClassType = ePlayerClassCode::NONE;
 }
 
 CPlayer::~CPlayer()
 {
 	Safe_Delete(m_pInventory);
+	Safe_Delete(m_pEquipment);
 }
 
 void CPlayer::Initialize()
 {
 	m_pInventory = new CInventory;
+	m_pEquipment = new CEquipment;
 	m_pInventory->UpdateGold(100);
 }
 

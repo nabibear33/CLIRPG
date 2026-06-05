@@ -7,10 +7,6 @@ CInventory::CInventory()
 {
 	m_eCurrentTab = eItemType::NONE;
 	m_iGold = 0;
-	for (int i = 0; i < MAX_INVENTORY_SIZE; ++i)
-	{
-		m_vecItem[i] = nullptr;
-	}
 }
 
 CInventory::~CInventory()

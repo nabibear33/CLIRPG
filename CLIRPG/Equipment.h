@@ -1,40 +1,27 @@
-﻿#pragma once
+#pragma once
 
-#include "Item.h"
-#include "pch.h"
+class CEquipItem;
 
-class CPlayer;
-
-class CEquipment : public CItem
+class CEquipment
 {
 public:
 	CEquipment();
-	CEquipment(
-		eItemCode _eItemCode,
-		eEquipmentType _eEquipmentType,
-		const char szName[],
-		const char szDetail[],
-		int iBuyPrice,
-		int iSellPrice,
-		int iHP,
-		int iAttack
-	);
-	virtual ~CEquipment();
+	~CEquipment();
 
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Release();
 
-	virtual CItem* Clone() override;
-
-	void Equip(CPlayer* pPlayer);
-
-	virtual void PrintItemInfo(eStoreState _eStoreState) override;
+	void Equip();
+	void Unequip();
 
 private:
-	eEquipmentType m_eEquipmentType;
-
-	int m_iHP;
-	int m_iAttack;
+	
+	CEquipItem* pHead;
+	CEquipItem* pArmor;
+	CEquipItem* pGloves;
+	CEquipItem* pShoes;
+	CEquipItem* pWeapon;
+	
 };
 

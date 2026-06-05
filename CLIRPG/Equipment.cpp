@@ -1,20 +1,13 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "Equipment.h"
-#include "Player.h"
 
-CEquipment::CEquipment() : CItem()
+CEquipment::CEquipment()
 {
-	m_eEquipmentType = eEquipmentType::NONE;
-	m_iHP = 0;
-	m_iAttack = 0;
-}
-
-CEquipment::CEquipment(eItemCode _eItemCode, eEquipmentType _eEquipmentType, const char szName[], const char szDetail[], int iBuyPrice, int iSellPrice, int iHP, int iAttack)
-	: CItem(_eItemCode, eItemType::EQUIPMENT, szName, szDetail, iBuyPrice, iSellPrice)
-{
-	m_eEquipmentType = _eEquipmentType;
-	m_iHP = iHP;
-	m_iAttack = iAttack;
+	pHead = nullptr;
+	pArmor = nullptr;
+	pGloves = nullptr;
+	pShoes = nullptr;
+	pWeapon = nullptr;
 }
 
 CEquipment::~CEquipment()
@@ -33,18 +26,10 @@ void CEquipment::Release()
 {
 }
 
-CItem* CEquipment::Clone()
-{
-	return new CEquipment(*this);
-}
-
-void CEquipment::Equip(CPlayer* pPlayer)
+void CEquipment::Equip()
 {
 }
 
-void CEquipment::PrintItemInfo(eStoreState _eStoreState)
+void CEquipment::Unequip()
 {
-	CItem::PrintItemInfo(_eStoreState);
-	cout << "체력 증가량 : " << m_iHP << endl;
-	cout << "공격력 증가량 : " << m_iAttack << endl;
 }

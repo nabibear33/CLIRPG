@@ -4,7 +4,7 @@
 
 tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 	{eItemCode::EQUIP_HEADGEAR_BASIC,
-	new CEquipment(
+	new CEquipItem(
 		eItemCode::EQUIP_HEADGEAR_BASIC,
 		eEquipmentType::HEADGEAR,
 		"하급 방어구 모자",
@@ -15,7 +15,7 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 		0
 	)},
 	{eItemCode::EQUIP_ARMOR_BASIC,
-	new CEquipment(
+	new CEquipItem(
 		eItemCode::EQUIP_ARMOR_BASIC,
 		eEquipmentType::ARMOR,
 		"하급 방어구 갑옷",
@@ -26,7 +26,7 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 		0
 	)},
 	{eItemCode::EQUIP_WEAPON_BASIC,
-	new CEquipment(
+	new CEquipItem(
 		eItemCode::EQUIP_WEAPON_BASIC,
 		eEquipmentType::WEAPON,
 		"하급 무기",
@@ -39,7 +39,7 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 
 
 	{eItemCode::CONSUME_PORTION_HP_SMALL,
-	new CConsumable(
+	new CConsumeItem(
 		eItemCode::CONSUME_PORTION_HP_SMALL,
 		"소형 HP 포션",
 		"HP를 10 회복시킨다",
@@ -50,7 +50,7 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 
 
 	{eItemCode::MISC_DROP_EASY,
-	new CMisc(
+	new CMiscItem(
 		eItemCode::MISC_DROP_EASY,
 		"하급 몬스터의 가죽",
 		"하급 몬스터에게 드랍되는 아이템이다",
@@ -58,7 +58,7 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 		5
 	)},
 	{eItemCode::MISC_DROP_NORMAL,
-	new CMisc(
+	new CMiscItem(
 		eItemCode::MISC_DROP_NORMAL,
 		"중급 몬스터의 가죽",
 		"중급 몬스터에게 드랍되는 아이템이다",
@@ -66,7 +66,7 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 		9
 	)},
 	{eItemCode::MISC_DROP_HARD,
-	new CMisc(
+	new CMiscItem(
 		eItemCode::MISC_DROP_HARD,
 		"상급 몬스터의 가죽",
 		"상급 몬스터에게 드랍되는 아이템이다",

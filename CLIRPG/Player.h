@@ -4,6 +4,7 @@
 #include "pch.h"
 
 class CInventory;
+class CEquipment;
 class CItem;
 
 class CPlayer : public CCharacter
@@ -29,5 +30,6 @@ private:
 	ePlayerClassCode m_ePlayerClassType;
 
 	CInventory* m_pInventory;
+	CEquipment* m_pEquipment;
 };
 

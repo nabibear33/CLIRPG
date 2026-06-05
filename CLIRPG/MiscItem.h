@@ -1,18 +1,18 @@
 ﻿#pragma once
 #include "Item.h"
 
-class CMisc : public CItem
+class CMiscItem : public CItem
 {
 public:
-	CMisc();
-	CMisc(
+	CMiscItem();
+	CMiscItem(
 		eItemCode _eItemCode,
 		const char szName[],
 		const char szDetail[],
 		int iBuyPrice,
 		int iSellPrice
 	);
-	virtual ~CMisc();
+	virtual ~CMiscItem();
 
 	virtual CItem* Clone();
 
