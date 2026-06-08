@@ -51,7 +51,7 @@ tagSaveData CSaveGame::GetSaveData(CPlayer* pPlayer)
 {
 	tagSaveData tTmpSaveData;
 
-	strcpy_s(tTmpSaveData.szName, sizeof(MAX_NAME_SIZE), pPlayer->GetName());
+	strcpy_s(tTmpSaveData.szName, sizeof(char) * MAX_NAME_SIZE, pPlayer->GetName());
 	tTmpSaveData.iAttack = pPlayer->GetAttack();
 	tTmpSaveData.iHP = pPlayer->GetHP();
 	tTmpSaveData.iMaxHP = pPlayer->GetMaxHP();
@@ -68,8 +68,16 @@ tagSaveData CSaveGame::GetSaveData(CPlayer* pPlayer)
 	tTmpSaveData.iEquipmentSize = pPlayer->GetEquipment()->GetEquipSlot().size();
 	for (size_t i = 0; i < tTmpSaveData.iEquipmentSize; ++i)
 	{
-		tTmpSaveData.mapEquipmentKey[i] = static_cast<eEquipmentType>(i);
-		tTmpSaveData.mapEquipmentValue[i] = pPlayer->GetEquipment()->GetEquipSlot()[static_cast<eEquipmentType>(i)]->GetItemCode();
+		tTmpSaveData.mapEquipmentKey[i] = static_cast<eEquipmentType>(i + 1);
+		CEquipItem* pEquipItem = pPlayer->GetEquipment()->GetEquipSlot()[tTmpSaveData.mapEquipmentKey[i]];
+		if (pEquipItem)
+		{
+			tTmpSaveData.mapEquipmentValue[i] = pEquipItem->GetItemCode();
+		}
+		else
+		{
+			tTmpSaveData.mapEquipmentValue[i] = eItemCode::EQUIP_NONE;
+		}
 	}
 
 	return tTmpSaveData;

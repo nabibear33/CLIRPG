@@ -72,7 +72,7 @@ enum class ePlayerClassCode
 	NONE = 0,
 	WARRIOR,
 	MAGICIAN,
-	THEIF,
+	THIEF,
 	MAX,
 };
 

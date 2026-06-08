@@ -165,7 +165,7 @@ void CInventory::PrintItems(eStoreState _eStoreState)
 	cout << "==================================" << endl;
 }
 
-vector<CItem*> CInventory::GetEquipItems()
+vector<CEquipItem*> CInventory::GetEquipItems()
 {
 	vector<CEquipItem*> vecEquipItems;
 	for (auto iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)

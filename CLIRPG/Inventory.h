@@ -35,7 +35,7 @@ public:
 
 	inline bool IsFull() { return m_vecItem.size() == 5; }
 	
-	vector<CItem*> GetEquipItems();
+	vector<CEquipItem*> GetEquipItems();
 
 	void LoadSaveData(tagSaveData& tSaveData);
 	

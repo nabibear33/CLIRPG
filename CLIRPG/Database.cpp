@@ -115,9 +115,9 @@ tMonsterDB DB::MonsterDB[MAX_DB_ARRAY_SIZE] = {
 };
 
 tPlayerClassDB DB::PlayerClassDB[MAX_DB_ARRAY_SIZE] = {
-	{ePlayerClassCode::WARRIOR, new CPlayer("전사", 150, 150, 5)},
-	{ePlayerClassCode::MAGICIAN, new CPlayer("마법사", 50, 50, 15)},
-	{ePlayerClassCode::THEIF, new CPlayer("도적", 100, 100, 10)},
+	{ePlayerClassCode::WARRIOR, new CPlayer(ePlayerClassCode::WARRIOR, "전사", 150, 150, 5)},
+	{ePlayerClassCode::MAGICIAN, new CPlayer(ePlayerClassCode::MAGICIAN, "마법사", 50, 50, 15)},
+	{ePlayerClassCode::THIEF, new CPlayer(ePlayerClassCode::THIEF, "도적", 100, 100, 10)},
 };
 
 tDropItemDB DB::DropItemDB[MAX_DB_ARRAY_SIZE] = {

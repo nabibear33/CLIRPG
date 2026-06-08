@@ -11,7 +11,7 @@ class CPlayer : public CCharacter
 {
 public:
 	CPlayer();
-	CPlayer(const char szName[], int iMaxHP, int iHP, int iAttack);
+	CPlayer(ePlayerClassCode _ePlayerClassCode, const char szName[], int iMaxHP, int iHP, int iAttack);
 	virtual ~CPlayer();
 
 	virtual void Initialize();
@@ -19,8 +19,6 @@ public:
 	virtual void Release();
 
 	virtual CCharacter* Clone() override;
-
-	virtual void InitializeClass(int iSelection);
 
 	void Revive();
 

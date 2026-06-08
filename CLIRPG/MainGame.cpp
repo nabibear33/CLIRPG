@@ -32,11 +32,6 @@ void CMainGame::Initialize()
 
 void CMainGame::Update()
 {
-	if (m_pPlayer)
-	{
-		CPlayer* pPlayer = dynamic_cast<CPlayer*>(m_pPlayer);
-		m_pSaveManager->Save(pPlayer);
-	}
 	
 	while (m_eGameStatus != eGameStatus::QUIT)
 	{
@@ -145,8 +140,6 @@ void CMainGame::ChooseClass()
 		case 1:
 		case 2:
 		case 3:
-			// m_pPlayer = new CPlayer;
-			// dynamic_cast<CPlayer*>(m_pPlayer)->InitializeClass(iClassSelection);
 			_ePlayerClassCode = static_cast<ePlayerClassCode>(iClassSelection);
 			m_pPlayer = CCharacter::CreatePlayer(_ePlayerClassCode);
 			m_pPlayer->Initialize();
@@ -166,7 +159,7 @@ void CMainGame::OnLobby()
 	{
 		system("cls");
 		m_pPlayer->PrintCharacterInfo();
-		cout << "1. 사냥터  2. 상점  3. 인벤토리  4. 장비  5. 게임 종료" << endl;
+		cout << "1. 사냥터  2. 상점  3. 인벤토리  4. 장비  5. 저장  6. 게임 종료" << endl;
 		cout << "선택지를 입력하세요 : ";
 
 		int iMainMenuSelection(0);
@@ -187,6 +180,13 @@ void CMainGame::OnLobby()
 			SetGameStatus(eGameStatus::ON_EQUIPMENT);
 			return;
 		case 5:
+			if (m_pPlayer)
+			{
+				CPlayer* pPlayer = dynamic_cast<CPlayer*>(m_pPlayer);
+				m_pSaveManager->Save(pPlayer);
+			}
+			return;
+		case 6:
 			SetGameStatus(eGameStatus::QUIT);
 			return;
 		default:

@@ -12,6 +12,10 @@ CEquipment::CEquipment(CPlayer* pPlayer) : m_pPlayer(pPlayer)
 
 CEquipment::~CEquipment()
 {
+	for (auto iter = m_mapEquipSlot.begin(); iter != m_mapEquipSlot.end(); ++iter)
+	{
+		Safe_Delete(iter->second);
+	}
 }
 
 void CEquipment::Initialize()
@@ -117,10 +121,18 @@ void CEquipment::LoadSaveData(tagSaveData& tSaveData)
 {
 	for (int i = 0; i < tSaveData.iEquipmentSize; ++i)
 	{
-		m_mapEquipSlot.insert({
-			tSaveData.mapEquipmentKey[i],
-			dynamic_cast<CEquipItem*>(CItem::Create(tSaveData.mapEquipmentValue[i]))
-		});
+		if (tSaveData.mapEquipmentValue[i] != eItemCode::EQUIP_NONE)
+		{
+			CItem* TmpItem = CItem::Create(tSaveData.mapEquipmentValue[i]);
+			m_mapEquipSlot.insert_or_assign(
+				tSaveData.mapEquipmentKey[i],
+				dynamic_cast<CEquipItem*>(TmpItem)
+			);
+		}
+		else
+		{
+			m_mapEquipSlot.insert_or_assign(tSaveData.mapEquipmentKey[i], nullptr);
+		}
 	}
 }
 
@@ -139,7 +151,7 @@ void CEquipment::OnEquipMenu()
 		cout << endl;
 
 		cout << "============ 아이템 목록 =============" << endl;
-		vector<CItem*> vecEquipItems = m_pPlayer->GetInventory()->GetEquipItems();
+		vector<CEquipItem*> vecEquipItems = m_pPlayer->GetInventory()->GetEquipItems();
 		for (auto iter = vecEquipItems.begin(); iter != vecEquipItems.end(); ++iter)
 		{
 			cout << (iter - vecEquipItems.begin() + 1) << ". ";
