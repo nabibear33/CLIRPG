@@ -26,7 +26,9 @@ public:
 
 	virtual CInventory* GetInventory();
 	inline CEquipment* GetEquipment() { return m_pEquipment; }
+	inline ePlayerClassCode GetPlayerClassCode() { return m_ePlayerClassType; }
 
+	void LoadSaveData(tagSaveData& tSaveData);
 
 private:
 	ePlayerClassCode m_ePlayerClassType;

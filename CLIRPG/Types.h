@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "Constants.h"
+
 enum class eGameStatus
 {
 	NONE,
@@ -81,4 +83,26 @@ enum class eMonsterCode
 	NORMAL,
 	HARD,
 	MAX,
+};
+
+
+struct tagSaveData
+{
+public:
+	// Player Info
+	char szName[MAX_NAME_SIZE];
+	int iMaxHP;
+	int iHP;
+	int iAttack;
+	ePlayerClassCode ePlayerClassType;
+
+	// Inventory Info
+	eItemCode vecInventory[MAX_INVENTORY_SIZE];
+	int iInventoryGold;
+	size_t iInventorySize;
+
+	// Equipment Info
+	eEquipmentType mapEquipmentKey[MAX_INVENTORY_SIZE];
+	eItemCode mapEquipmentValue[MAX_INVENTORY_SIZE];
+	size_t iEquipmentSize;
 };

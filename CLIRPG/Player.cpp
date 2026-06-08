@@ -92,3 +92,15 @@ CInventory* CPlayer::GetInventory()
 	return m_pInventory;
 }
 
+void CPlayer::LoadSaveData(tagSaveData& tSaveData)
+{
+	m_ePlayerClassType = tSaveData.ePlayerClassType;
+	SetName(tSaveData.szName);
+	SetMaxHP(tSaveData.iMaxHP);
+	SetHP(tSaveData.iHP);
+	SetAttack(tSaveData.iAttack);
+
+	m_pInventory->LoadSaveData(tSaveData);
+	m_pEquipment->LoadSaveData(tSaveData);
+}
+

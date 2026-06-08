@@ -19,7 +19,7 @@ public:
 	void UpdateGold(int Gold);
 	void SetCurrentTab(eItemType _eItemType);
 	int GetCurrentGold();
-	vector<CItem*>& GetItems();
+	vector<CItem*> GetItems();
 
 	void AddItem(CItem* pItem);
 	CItem* PopItem(CItem* pItem);
@@ -35,7 +35,9 @@ public:
 
 	inline bool IsFull() { return m_vecItem.size() == 5; }
 	
-	vector<CEquipItem*> GetEquipItems();
+	vector<CItem*> GetEquipItems();
+
+	void LoadSaveData(tagSaveData& tSaveData);
 	
 private:
 	vector<CItem*> m_vecItem;

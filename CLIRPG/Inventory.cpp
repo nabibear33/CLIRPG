@@ -136,7 +136,7 @@ int CInventory::GetCurrentGold()
 	return m_iGold;
 }
 
-vector<CItem*>& CInventory::GetItems()
+vector<CItem*> CInventory::GetItems()
 {
 	return m_vecItem;
 }
@@ -165,7 +165,7 @@ void CInventory::PrintItems(eStoreState _eStoreState)
 	cout << "==================================" << endl;
 }
 
-vector<CEquipItem*> CInventory::GetEquipItems()
+vector<CItem*> CInventory::GetEquipItems()
 {
 	vector<CEquipItem*> vecEquipItems;
 	for (auto iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
@@ -176,4 +176,14 @@ vector<CEquipItem*> CInventory::GetEquipItems()
 		}
 	}
 	return vecEquipItems;
+}
+
+void CInventory::LoadSaveData(tagSaveData& tSaveData)
+{
+	for (int i = 0; i < tSaveData.iInventorySize; ++i)
+	{
+		m_vecItem.push_back(CItem::Create(tSaveData.vecInventory[i]));
+	}
+	m_iGold = tSaveData.iInventoryGold;
+
 }

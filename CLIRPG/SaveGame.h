@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 
 #include "pch.h"
 
-class CCharacter;
+class CPlayer;
 
 class CSaveGame
 {
@@ -14,7 +14,9 @@ public:
 	virtual void Update();
 	virtual void Release();
 
-	void Save(CCharacter* pPlayer);
-	void Load(CCharacter*& pPlayer);
+	void Save(CPlayer* pPlayer);
+	tagSaveData GetSaveData(CPlayer* pPlayer);
+	void Load(CPlayer*& pPlayer);
+	void LoadSaveData(tagSaveData& tSaveData, CPlayer*& pPlayer);
 };
 

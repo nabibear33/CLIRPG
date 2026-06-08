@@ -32,7 +32,7 @@ public:
 
 	virtual void PrintItemInfo(eStoreState _eStoreState);
 
-
+	inline eItemCode GetItemCode() { return m_eItemCode; }
 
 private:
 	eItemCode m_eItemCode;

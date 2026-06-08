@@ -34,6 +34,7 @@ public:
 
 	inline eEquipmentType GetEquipmentType() { return m_eEquipmentType; }
 
+
 private:
 	eEquipmentType m_eEquipmentType;
 

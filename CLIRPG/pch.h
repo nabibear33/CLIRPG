@@ -13,15 +13,9 @@
 #include "Types.h"
 #include "Enum.h"
 #include "Memory.h"
+#include "Constants.h"
 
 using namespace std;
-
-// constants
-const int MAX_NAME_SIZE = 999;
-const int MAX_DETAIL_SIZE = 999;
-const int MAX_INVENTORY_SIZE = 20;
-const int MAX_DB_ARRAY_SIZE = 99;
-const char PATH[] = "save.dat";
 
 // Memory Debugging
 #ifdef _DEBUG

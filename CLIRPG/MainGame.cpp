@@ -34,7 +34,8 @@ void CMainGame::Update()
 {
 	if (m_pPlayer)
 	{
-		m_pSaveManager->Save(m_pPlayer);
+		CPlayer* pPlayer = dynamic_cast<CPlayer*>(m_pPlayer);
+		m_pSaveManager->Save(pPlayer);
 	}
 	
 	while (m_eGameStatus != eGameStatus::QUIT)
@@ -107,6 +108,7 @@ void CMainGame::SelectStartMode()
 		int iStartModeSelection(0);
 		cin >> iStartModeSelection;
 
+		CPlayer* pPlayer = nullptr;
 		switch (iStartModeSelection)
 		{
 		case 1:
@@ -114,8 +116,8 @@ void CMainGame::SelectStartMode()
 			return;
 		case 2:
 			m_pPlayer = new CPlayer;
-			m_pSaveManager->Load(m_pPlayer);
-			m_pPlayer->Initialize();
+			pPlayer = dynamic_cast<CPlayer*>(m_pPlayer);
+			m_pSaveManager->Load(pPlayer);
 			SetGameStatus(eGameStatus::ON_LOBBY);
 			return;
 		default:

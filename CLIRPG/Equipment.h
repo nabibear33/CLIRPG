@@ -21,6 +21,10 @@ public:
 
 	void UpdatePlayerStat(CEquipItem* pEquipItem, bool bEquip);
 
+	inline map<eEquipmentType, CEquipItem*>& GetEquipSlot() { return m_mapEquipSlot; }
+
+	void LoadSaveData(tagSaveData& tSaveData);
+
 private:
 	map<eEquipmentType, CEquipItem*> m_mapEquipSlot;
 

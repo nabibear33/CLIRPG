@@ -113,6 +113,17 @@ void CEquipment::UpdatePlayerStat(CEquipItem* pEquipItem, bool bEquip)
 	m_pPlayer->SetMaxHP(m_pPlayer->GetMaxHP() + iCoef * pEquipItem->GetHP());
 }
 
+void CEquipment::LoadSaveData(tagSaveData& tSaveData)
+{
+	for (int i = 0; i < tSaveData.iEquipmentSize; ++i)
+	{
+		m_mapEquipSlot.insert({
+			tSaveData.mapEquipmentKey[i],
+			dynamic_cast<CEquipItem*>(CItem::Create(tSaveData.mapEquipmentValue[i]))
+		});
+	}
+}
+
 void CEquipment::OnEquipMenu()
 {
 	while (true)
@@ -128,7 +139,7 @@ void CEquipment::OnEquipMenu()
 		cout << endl;
 
 		cout << "============ 아이템 목록 =============" << endl;
-		vector<CEquipItem*> vecEquipItems = m_pPlayer->GetInventory()->GetEquipItems();
+		vector<CItem*> vecEquipItems = m_pPlayer->GetInventory()->GetEquipItems();
 		for (auto iter = vecEquipItems.begin(); iter != vecEquipItems.end(); ++iter)
 		{
 			cout << (iter - vecEquipItems.begin() + 1) << ". ";
