@@ -25,6 +25,9 @@ void CStore::Initialize()
 	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_ARMOR_BASIC));
 	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_HEADGEAR_BASIC));
 	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_WEAPON_BASIC));
+	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_ARMOR_RARE));
+	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_HEADGEAR_RARE));
+	m_pInventory->AddItem(CItem::Create(eItemCode::EQUIP_WEAPON_RARE));
 	m_pInventory->AddItem(CItem::Create(eItemCode::CONSUME_PORTION_HP_SMALL));
 }
 

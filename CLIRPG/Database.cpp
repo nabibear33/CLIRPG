@@ -7,8 +7,8 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 	new CEquipItem(
 		eItemCode::EQUIP_HEADGEAR_BASIC,
 		eEquipmentType::HEAD,
-		"하급 방어구 모자",
-		"하급 방어구 모자이다",
+		"기본 방어구 모자",
+		"기본 방어구 모자이다",
 		50,
 		1,
 		10,
@@ -18,8 +18,8 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 	new CEquipItem(
 		eItemCode::EQUIP_ARMOR_BASIC,
 		eEquipmentType::ARMOR,
-		"하급 방어구 갑옷",
-		"하급 방어구 갑옷이다",
+		"기본 방어구 갑옷",
+		"기본 방어구 갑옷이다",
 		100,
 		1,
 		20,
@@ -29,12 +29,45 @@ tItemDB DB::ItemDB[MAX_DB_ARRAY_SIZE] = {
 	new CEquipItem(
 		eItemCode::EQUIP_WEAPON_BASIC,
 		eEquipmentType::WEAPON,
-		"하급 무기",
-		"하급 무기이다",
+		"기본 무기",
+		"기본 무기이다",
 		100,
 		1,
 		0,
 		10
+	)},
+	{eItemCode::EQUIP_HEADGEAR_RARE,
+	new CEquipItem(
+		eItemCode::EQUIP_HEADGEAR_RARE,
+		eEquipmentType::HEAD,
+		"희귀 방어구 모자",
+		"희귀 방어구 모자이다",
+		50,
+		1,
+		20,
+		0
+	)},
+	{eItemCode::EQUIP_ARMOR_RARE,
+	new CEquipItem(
+		eItemCode::EQUIP_ARMOR_RARE,
+		eEquipmentType::ARMOR,
+		"희귀 방어구 갑옷",
+		"희귀 방어구 갑옷이다",
+		100,
+		1,
+		40,
+		0
+	)},
+	{eItemCode::EQUIP_WEAPON_RARE,
+	new CEquipItem(
+		eItemCode::EQUIP_WEAPON_RARE,
+		eEquipmentType::WEAPON,
+		"희귀 무기",
+		"희귀 무기이다",
+		100,
+		1,
+		0,
+		20
 	)},
 
 

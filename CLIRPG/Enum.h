@@ -30,4 +30,11 @@ public:
 		}
 	}
 
+	template<typename T>
+	static size_t EnumToIndex(T Type)
+	{
+		return static_cast<int>(Type);
+	}
+
+
 };

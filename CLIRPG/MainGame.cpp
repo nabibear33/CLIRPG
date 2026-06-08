@@ -201,7 +201,7 @@ void CMainGame::SelectLevel()
 	{
 		system("cls");
 		m_pPlayer->PrintCharacterInfo();
-		cout << "1. 초급  2. 중급  3. 고급  4. 돌아가기" << endl;
+		cout << "0. 돌아가기  1. 초급  2. 중급  3. 고급" << endl;
 		cout << "선택지를 입력하세요 : ";
 
 		int iLevelSelection(0);
@@ -210,6 +210,9 @@ void CMainGame::SelectLevel()
 		eMonsterCode _eMonsterCode;
 		switch (iLevelSelection)
 		{
+		case 0:
+			SetGameStatus(eGameStatus::ON_LOBBY);
+			return;
 		case 1:
 		case 2:
 		case 3:
@@ -217,9 +220,6 @@ void CMainGame::SelectLevel()
 			m_pMonster = CCharacter::CreateMonster(_eMonsterCode);
 			m_pMonster->Initialize();
 			SetGameStatus(eGameStatus::ON_COMBAT);
-			return;
-		case 4:
-			SetGameStatus(eGameStatus::ON_LOBBY);
 			return;
 		default:
 			cout << "올바른 선택지를 입력하세요." << endl;

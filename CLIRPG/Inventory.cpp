@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "Inventory.h"
 #include "Item.h"
+#include "EquipItem.h"
 #include "Memory.h"
 
 CInventory::CInventory()
@@ -11,7 +12,7 @@ CInventory::CInventory()
 
 CInventory::~CInventory()
 {
-	for (int i = 0; i < MAX_INVENTORY_SIZE; ++i)
+	for (size_t i = 0; i < m_vecItem.size(); ++i)
 	{
 		Safe_Delete(m_vecItem[i]);
 	}
@@ -53,13 +54,17 @@ void CInventory::AddItem(CItem* pItem)
 
 CItem* CInventory::PopItem(CItem* pItem)
 {
-	for (vector<CItem*>::iterator iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
+	for (vector<CItem*>::iterator iter = m_vecItem.begin(); iter != m_vecItem.end(); )
 	{
 		if (pItem == *iter)
 		{
 			CItem* pTempItem = *iter;
-			m_vecItem.erase(iter);
+			iter = m_vecItem.erase(iter);
 			return pTempItem;
+		}
+		else
+		{
+			++iter;
 		}
 	}
 
@@ -84,13 +89,17 @@ CItem* CInventory::PopItem(int iIndex)
 
 void CInventory::RemoveItem(CItem* pItem)
 {
-	for (vector<CItem*>::iterator iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
+	for (vector<CItem*>::iterator iter = m_vecItem.begin(); iter != m_vecItem.end(); )
 	{
 		if (pItem == *iter)
 		{
-			CItem* pTempItem = *iter;
 			Safe_Delete(*iter);
-			m_vecItem.erase(iter);
+			iter = m_vecItem.erase(iter);
+			return;
+		}
+		else
+		{
+			++iter;
 		}
 	}
 
@@ -156,14 +165,14 @@ void CInventory::PrintItems(eStoreState _eStoreState)
 	cout << "==================================" << endl;
 }
 
-vector<CItem*>& CInventory::GetEquipItems()
+vector<CEquipItem*> CInventory::GetEquipItems()
 {
-	vector<CItem*> vecEquipItems;
+	vector<CEquipItem*> vecEquipItems;
 	for (auto iter = m_vecItem.begin(); iter != m_vecItem.end(); ++iter)
 	{
 		if ((*iter)->GetItemType() == eItemType::EQUIPMENT)
 		{
-			vecEquipItems.push_back((*iter));
+			vecEquipItems.push_back(dynamic_cast<CEquipItem*>(*iter));
 		}
 	}
 	return vecEquipItems;

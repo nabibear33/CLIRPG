@@ -3,6 +3,7 @@
 #include "pch.h"
 
 class CItem;
+class CEquipItem;
 
 class CInventory
 {
@@ -34,7 +35,7 @@ public:
 
 	inline bool IsFull() { return m_vecItem.size() == 5; }
 	
-	vector<CItem*>& GetEquipItems();
+	vector<CEquipItem*> GetEquipItems();
 	
 private:
 	vector<CItem*> m_vecItem;

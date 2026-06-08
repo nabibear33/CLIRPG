@@ -33,8 +33,9 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	m_pInventory = new CInventory;
+	m_pInventory->UpdateGold(1000);
 	m_pEquipment = new CEquipment(this);
-	m_pInventory->UpdateGold(100);
+	m_pEquipment->Initialize();
 }
 
 void CPlayer::Update()

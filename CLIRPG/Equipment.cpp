@@ -27,21 +27,21 @@ void CEquipment::Update()
 	{
 		system("cls");
 
-		cout << "1. 장착(교체)  2. 해제  3. 뒤로가기" << endl;
+		cout << "0. 뒤로가기  1. 장착(교체)  2. 해제" << endl;
 		cout << "선택지를 입력하세요 : ";
 
 		int iSelection(0);
 		cin >> iSelection;
 		switch (iSelection)
 		{
+		case 0:
+			return;
 		case 1:
 			OnEquipMenu();
 			break;
 		case 2:
 			OnUnequipMenu();
 			break;
-		case 3:
-			return;
 		default:
 			cout << "올바른 선택지를 입력하세요." << endl;
 			system("pause");
@@ -65,9 +65,16 @@ void CEquipment::Render()
 	for (auto iter = m_mapEquipSlot.begin(); iter != m_mapEquipSlot.end(); ++iter)
 	{
 		CEquipItem* pCurrentEquipItem = iter->second;
-		cout << "[" << CEnum::EnumToString(iter->first) << "] " << pCurrentEquipItem->GetName() << endl;
-		cout << "체력 +" << pCurrentEquipItem->GetHP() << "\t";
-		cout << "공격력 +" << pCurrentEquipItem->GetAttack() << endl;
+		if (pCurrentEquipItem)
+		{
+			cout << "[" << CEnum::EnumToString(iter->first) << "] " << pCurrentEquipItem->GetName() << endl;
+			cout << "체력 +" << pCurrentEquipItem->GetHP() << "\t";
+			cout << "공격력 +" << pCurrentEquipItem->GetAttack() << endl;
+		}
+		else
+		{
+			cout << "[" << CEnum::EnumToString(iter->first) << "] " << "미장착" << endl;
+		}
 	}
 }
 
@@ -101,15 +108,9 @@ void CEquipment::Unequip(CEquipItem* pEquipItem)
 void CEquipment::UpdatePlayerStat(CEquipItem* pEquipItem, bool bEquip)
 {
 	int iCoef = bEquip ? 1 : -1;
-	for (auto iter = m_mapEquipSlot.begin(); iter != m_mapEquipSlot.end(); ++iter)
-	{
-		CEquipItem* pCurrentEquipItem = iter->second;
-		if (pCurrentEquipItem)
-		{
-			m_pPlayer->SetAttack(m_pPlayer->GetAttack() + iCoef * pCurrentEquipItem->GetAttack());
-			m_pPlayer->SetHP(m_pPlayer->GetHP() + iCoef * pCurrentEquipItem->GetHP());
-		}
-	}
+	m_pPlayer->SetAttack(m_pPlayer->GetAttack() + iCoef * pEquipItem->GetAttack());
+	m_pPlayer->SetHP(m_pPlayer->GetHP() + iCoef * pEquipItem->GetHP());
+	m_pPlayer->SetMaxHP(m_pPlayer->GetMaxHP() + iCoef * pEquipItem->GetHP());
 }
 
 void CEquipment::OnEquipMenu()
@@ -119,25 +120,40 @@ void CEquipment::OnEquipMenu()
 		system("cls");
 
 		m_pPlayer->PrintCharacterInfo();
-		vector<CItem*>& vecEquipItems = m_pPlayer->GetInventory()->GetEquipItems();
+
+		cout << endl;
+
+		Render();
+
+		cout << endl;
+
+		cout << "============ 아이템 목록 =============" << endl;
+		vector<CEquipItem*> vecEquipItems = m_pPlayer->GetInventory()->GetEquipItems();
 		for (auto iter = vecEquipItems.begin(); iter != vecEquipItems.end(); ++iter)
 		{
 			cout << (iter - vecEquipItems.begin() + 1) << ". ";
 			(*iter)->PrintItemInfo(eStoreState::NONE);
 		}
+		cout << "=====================================" << endl;
 
+		cout << endl;
+		
 		cout << "0. 뒤로가기" << endl;
 		cout << "장착할 아이템 번호를 입력하세요 : ";
 
 		size_t iSelection(0);
 		cin >> iSelection;
-		if (iSelection > 0 && iSelection <= vecEquipItems.size())
+
+		if (iSelection == 0)
+		{
+			return;
+		}
+		else if (iSelection > 0 && iSelection <= vecEquipItems.size())
 		{
 			CEquipItem* pEquipItem = dynamic_cast<CEquipItem*>(vecEquipItems[iSelection - 1]);
 			if (pEquipItem)
 			{
 				Equip(pEquipItem);
-				m_pPlayer->GetInventory()->PopItem(vecEquipItems[iSelection - 1]);
 				cout << "장착(교체)이 완료되었습니다." << endl;
 				system("pause");
 				continue;
@@ -164,8 +180,12 @@ void CEquipment::OnUnequipMenu()
 	{
 		system("cls");
 		m_pPlayer->PrintCharacterInfo();
+
+		cout << endl;
+
 		Render();
 
+		cout << endl;
 		cout << "0. 뒤로가기  1. 모자  2. 방어구  3. 무기" << endl;
 		cout << "해제할 장비 아이템 번호를 입력하세요 : ";
 
@@ -174,6 +194,8 @@ void CEquipment::OnUnequipMenu()
 		eEquipmentType eType;
 		switch (iSelection)
 		{
+		case 0:
+			return;
 		case 1:
 			eType = eEquipmentType::HEAD;
 			break;
@@ -190,9 +212,15 @@ void CEquipment::OnUnequipMenu()
 		}
 		
 		CEquipItem* pSelectedEquipItem = m_mapEquipSlot[eType];
-		Unequip(pSelectedEquipItem);
-		m_pPlayer->GetInventory()->AddItem(pSelectedEquipItem);
-		cout << "해제가 완료되었습니다." << endl;
+		if (pSelectedEquipItem)
+		{
+			Unequip(pSelectedEquipItem);
+			cout << "해제가 완료되었습니다." << endl;
+		}
+		else
+		{
+			cout << "현재 해당 부위의 아이템이 장착되어 있지 않습니다." << endl;
+		}
 		system("pause");
 	}
 }
